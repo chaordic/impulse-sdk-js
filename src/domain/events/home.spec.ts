@@ -1,9 +1,7 @@
 import { Events } from "@/domain/events/home"
-import {
-    eventHomeInput as mockEventHomeInput
-} from "@/domain/events/schemas/eventHomeSchema"
+import { eventHomeInput } from "@/domain/events/schemas/eventHomeSchema"
 
-const mockEventHomeInput = {
+const mockEventHomeInput: eventHomeInput = {
     info: {
         pageViewId: "c648ac3b-478e-435f-92f7-809d01a2b0f9",
         shopbackCookie: "fb4e49b6-35e3-42a1-a397-960f0b37ab6a",
