@@ -1,0 +1,11 @@
+export const BASE_URL = "https://events.chaordicsystems.com/v7/events/views";
+export const HOME_URL = "/home";
+export const SEARCH_URL = "/search";
+export const PRODUCT_URL = "/product";
+export const SUBCATEGORY = "/subcategory";
+export const USERPROFILE_URL = "/userprofile";
+export const OTHER_URL = "/other";
+export const CATEGORY_URL = "/category";
+export const CART_URL = "/cart";
+export const TRANSACTION_URL = "/transaction";
+export const EMPTYSEARCH_URL = "/emptysearch";
