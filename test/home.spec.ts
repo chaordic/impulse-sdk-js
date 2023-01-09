@@ -1,16 +1,15 @@
-import { Events, homeInput } from "@/domain/events/home"
+import { Events, homeInput } from "../src/domain/events/home"
 
 const mockHomeInput: homeInput = {
-    apiKey: "sample-api",
+    apiKey: "api-sample",
     source: "desktop",
-    salesChannel: 18,
+    salesChannel: "18",
     user: {
         id: "15078217",
         name: "Teste Linx Impulse",
         email: "teste@linx3.com",
         allowMailMarketing: true
     },
-    deviceId: "c648ac3b-478e-435f-92f7-809d01a2b0f9",
     info: {
         pageViewId: "c648ac3b-478e-435f-92f7-809d01a2b0f9",
         shopbackCookie: "fb4e49b6-35e3-42a1-a397-960f0b37ab6a",
@@ -27,10 +26,13 @@ const mockHomeInput: homeInput = {
 }
 
 describe('events', () => {
-    test('should dispatch event by home page', () => {
+    test('should dispatch event by home page', async () => {
         const homeInput = new Events.Home(mockHomeInput)
         // ....
-        expect(1).toBe(1)
+        let teste: any = await Events.viewHome(mockHomeInput)
+
+        console.log(teste.status)
+        expect(204).toBe(teste.status)
     })
 
     test('should dispatch event by info or deviceId', () => {
@@ -38,5 +40,11 @@ describe('events', () => {
         // ....
         console.log(homeInput)
         expect(1).toBe(1)
+    })
+
+    test('should dispatch event by make request', async () => {
+        let teste: any = await Events.viewHomeRequest(mockHomeInput)
+
+        console.log(teste)
     })
 })
