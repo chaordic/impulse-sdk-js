@@ -1,6 +1,6 @@
 import { ORIGIN_URL } from "@/domain/helpers/constants";
+import { formatDateToRFC3339 } from "@/domain/helpers/formatDateToRFC3339";
 import { AxiosRequestConfig, AxiosHeaders } from "axios";
-
 export interface Params {
   [key: string]:
     | string
@@ -36,9 +36,9 @@ export interface RequestParams {
 }
 
 export async function buildRequest(params: RequestParams): Promise<AxiosRequestConfig> {
-  const headers = computeHeaders(params);
-  const url = computeUri(params);
-  let body = params.bodyContent;
+  const headers: AxiosHeaders = computeHeaders(params);
+  const url: string = computeUri(params);
+  let body: any = params.bodyContent;
 
   if (body === "{}") {
     return {
@@ -46,20 +46,20 @@ export async function buildRequest(params: RequestParams): Promise<AxiosRequestC
       headers: headers,
       url: url
     };
-  } else {
-    return {
-      method: params.method,
-      headers: headers,
-      url: url,
-      data: body
-    };
+  } 
+
+  return {
+    method: params.method,
+    headers: headers,
+    url: url,
+    data: body
   }
 }
 
 function computeUri(params: RequestParams): string {
-  const path = validateAndComputePath(params.path, params.pathParams);
-  const queryString = stringify(params.queryParams);
-  let uri = params.baseEndpoint + path;
+  const path: string = validateAndComputePath(params.path, params.pathParams);
+  const queryString: string = stringify(params.queryParams);
+  let uri: string = params.baseEndpoint + path;
   if (queryString) {
     uri = uri + "?" + queryString;
   }
@@ -80,7 +80,7 @@ function validateAndComputePath(path: string, pathParams?: Params): string {
 }
 
 function computeHeaders(params: RequestParams): AxiosHeaders {
-  const headers = new AxiosHeaders()
+  const headers: AxiosHeaders = new AxiosHeaders()
 
   headers.set('Content-Type', 'application/json');
   headers.set('Origin', ORIGIN_URL);
@@ -108,7 +108,7 @@ function stringify(queryParams?: Params): string {
         }
 
         if (Object.prototype.toString.call(value) === "[object Date]" && value instanceof Date) {
-          return key + "=" + "formatDateToRFC3339";
+          return key + "=" + formatDateToRFC3339(value);
         } else if (value || value === false || value === 0) {
           return key + "=" + value;
         }

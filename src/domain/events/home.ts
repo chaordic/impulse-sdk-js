@@ -1,43 +1,37 @@
-import { z } from "zod";
-import { UserSchema } from "@/domain/events/schemas/user.schema";
-import { DeviceIdSchema } from "@/domain/events/schemas/device-id.schema";
-import { InfoSchema } from "@/domain/events/schemas/info.schema";
-import { ApiKeySchema } from "@/domain/events/schemas/api-key.schema";
-import { SourceSchema } from "@/domain/events/schemas/source.schema";
-import { IdentitySchema } from "@/domain/events/schemas/identity.schema";
-import { UrlSchema } from "@/domain/events/schemas/url.schema";
-import { SalesChannelSchema } from "@/domain/events/schemas/sales-channel.schema";
+import axios, { AxiosResponse } from "axios";
 
-const eventHomeValidation = z.object({
-    apiKey: ApiKeySchema,
-    source: SourceSchema,
-    user: UserSchema,
-    identity: IdentitySchema,
-    url: UrlSchema,
-    salesChannel: SalesChannelSchema
-}).and(
-    z.union([
-        DeviceIdSchema,
-        InfoSchema
-    ])
-)
+import { buildRequest } from "@/infrastructure/request-generator";
+import { BASE_URL, HOME_PATH } from "@/domain/helpers/constants";
+import { SdkError } from "@/domain/events/exceptions/SdkError";
+import { homeViewInput } from "@/domain/events/validations/homeViewValidation";
 
-export type homeInput = z.input<typeof eventHomeValidation>;
-export type eventHomeInput = z.input<typeof eventHomeValidation>;
-export type eventHomeOutput = z.output<typeof eventHomeValidation>;
 export namespace Events {
-    export class Home {
-        home: {};
+    export async function viewHomeRequest(data: homeViewInput) {
+        const options = await buildRequest({
+            baseEndpoint: BASE_URL,
+            path: HOME_PATH,
+            method: "POST",
+            bodyContent: data
+        });
 
-        constructor(data: eventHomeInput) {
-            this.home = data
-        }
-    }   
-    export class Info {
-        home: {};
+        try {
+            const response: AxiosResponse = await axios.request(options)
 
-        constructor(data: homeInput) {
-            this.home = data
+            return {
+                data: response.data,
+                status: response.status,
+                statusText: response.statusText,
+                config: response.config
+            }            
+        } catch (err: any) {
+            const lastKnownError = {
+                data: err.response.data,
+                status: err.response.status,
+                statusText: err.response.statusText,
+                config: err.config
+            }
+            console.info(`Request failed with Exception : ${JSON.stringify(lastKnownError)}\n`)
+            throw new SdkError(lastKnownError);
         }
-    }   
+    }
 }

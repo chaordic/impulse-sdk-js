@@ -1,5 +1,5 @@
-// export const BASE_URL = "https://i326kx5kza.execute-api.us-east-1.amazonaws.com/v7/events/views";
-export const BASE_URL = "https://events.chaordicsystems.com/v7/events/views";
+export const BASE_URL = "https://focvlhytle.execute-api.us-east-1.amazonaws.com/v7/events/views";
+// export const BASE_URL = "https://events.chaordicsystems.com/v7/events/views";
 
 export const HOME_PATH = "/home";
 export const SEARCH_PATH = "/search";

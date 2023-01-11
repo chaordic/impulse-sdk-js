@@ -1,6 +1,7 @@
-import { Events, homeInput } from "../src/domain/events/home"
+import { Events } from "../src/domain/events/home"
+import { homeViewInput } from "../src/domain/events/validations/homeViewValidation"
 
-const mockHomeInput: homeInput = {
+const mockHomeInput: homeViewInput = {
     apiKey: "api-sample",
     source: "desktop",
     salesChannel: "18",
@@ -26,25 +27,12 @@ const mockHomeInput: homeInput = {
 }
 
 describe('events', () => {
-    test('should dispatch event by home page', async () => {
-        const homeInput = new Events.Home(mockHomeInput)
-        // ....
-        let teste: any = await Events.viewHome(mockHomeInput)
-
-        console.log(teste.status)
-        expect(204).toBe(teste.status)
-    })
-
-    test('should dispatch event by info or deviceId', () => {
-        const homeInput = new Events.Info(mockHomeInput)
-        // ....
-        console.log(homeInput)
-        expect(1).toBe(1)
-    })
-
-    test('should dispatch event by make request', async () => {
-        let teste: any = await Events.viewHomeRequest(mockHomeInput)
-
-        console.log(teste)
+    test('should dispatch event by make request viewHome', async () => {
+        try {
+            const response: any = await Events.viewHomeRequest(mockHomeInput)
+            expect(204).toBe(response.status)
+        } catch (err: any) {
+            expect(err.message).toBe("Client not found: api-samplee");
+        }
     })
 })
