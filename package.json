@@ -1,5 +1,5 @@
 {
-  "name": "@linx/impulse-sdk-js",
+  "name": "impulse-sdk-js",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
