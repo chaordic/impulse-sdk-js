@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const UserSchema = z
+export const userSchema = z
     .object({
         id: z
             .string({

@@ -1,12 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 
-import { buildRequest } from "@/infrastructure/request-generator";
-import { BASE_URL, HOME_PATH } from "@/domain/helpers/constants";
-import { SdkError } from "@/domain/events/exceptions/SdkError";
-import { homeViewInput } from "@/domain/events/validations/homeViewValidation";
+import { buildRequest } from "@/events/infrastructure/axios/requests/request-generator";
+import { BASE_URL, HOME_PATH } from "@/events/common/helpers/constants";
+import { DefaultApplicationError } from "@/events/application/errors/default-application-error";
+import { defaultInputValidation } from "@/events/application/validations/default-validation";
 
 export namespace Events {
-    export async function viewHomeRequest(data: homeViewInput) {
+    export async function homeViewRequest(data: defaultInputValidation) {
         const options = await buildRequest({
             baseEndpoint: BASE_URL,
             path: HOME_PATH,
@@ -31,7 +31,7 @@ export namespace Events {
                 config: err.config
             }
             console.info(`Request failed with Exception : ${JSON.stringify(lastKnownError)}\n`)
-            throw new SdkError(lastKnownError);
+            throw new DefaultApplicationError(lastKnownError);
         }
     }
 }

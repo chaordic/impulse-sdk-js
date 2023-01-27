@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const InfoSchema = z
+export const infoSchema = z
     .object({
         info: z
             .object({

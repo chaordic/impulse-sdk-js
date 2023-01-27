@@ -1,7 +1,7 @@
-import { Events } from "../src/domain/events/home"
-import { homeViewInput } from "../src/domain/events/validations/homeViewValidation"
+import { Events } from "../src/events/application/pages/home"
+import { defaultInputValidation } from "../src/events/application/validations/default-validation"
 
-const mockHomeInput: homeViewInput = {
+const mockHomeInput: defaultInputValidation = {
     apiKey: "api-sample",
     source: "desktop",
     salesChannel: "18",
@@ -29,7 +29,7 @@ const mockHomeInput: homeViewInput = {
 describe('events', () => {
     test('should dispatch event by make request viewHome', async () => {
         try {
-            const response: any = await Events.viewHomeRequest(mockHomeInput)
+            const response: any = await Events.homeViewRequest(mockHomeInput)
             expect(204).toBe(response.status)
         } catch (err: any) {
             expect(err.message).toBe("Client not found: api-samplee");

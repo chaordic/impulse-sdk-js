@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const IdentitySchema = z
+export const identitySchema = z
     .object({
         anonymousUserId: z
             .string({

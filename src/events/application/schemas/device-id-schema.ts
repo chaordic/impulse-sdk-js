@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const DeviceIdSchema = z
+export const deviceIdSchema = z
     .object({
         deviceId: z
             .string({

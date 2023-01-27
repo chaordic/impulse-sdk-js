@@ -1,6 +1,7 @@
-import { ORIGIN_URL } from "@/domain/helpers/constants";
-import { formatDateToRFC3339 } from "@/domain/helpers/formatDateToRFC3339";
+import { formatDateToRFC3339 } from "@/events/common/helpers/formatDateToRFC3339";
+import { buildHeaders } from "@/events/infrastructure/axios/headers/headers-generator";
 import { AxiosRequestConfig, AxiosHeaders } from "axios";
+
 export interface Params {
   [key: string]:
     | string
@@ -36,7 +37,7 @@ export interface RequestParams {
 }
 
 export async function buildRequest(params: RequestParams): Promise<AxiosRequestConfig> {
-  const headers: AxiosHeaders = computeHeaders(params);
+  const headers: AxiosHeaders = buildHeaders(params);
   const url: string = computeUri(params);
   let body: any = params.bodyContent;
 
@@ -77,23 +78,6 @@ function validateAndComputePath(path: string, pathParams?: Params): string {
     }
   }
   return path;
-}
-
-function computeHeaders(params: RequestParams): AxiosHeaders {
-  const headers: AxiosHeaders = new AxiosHeaders()
-
-  headers.set('Content-Type', 'application/json');
-  headers.set('Origin', ORIGIN_URL);
-
-  if (params.headerParams) {
-    for (const [key, value] of Object.entries(params.headerParams)) {
-      if (value) {
-        headers.set(key, String(value));
-      }
-    }
-  }
-
-  return headers
 }
 
 function stringify(queryParams?: Params): string {
