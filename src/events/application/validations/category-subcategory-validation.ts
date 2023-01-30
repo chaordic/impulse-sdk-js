@@ -1,3 +1,4 @@
+//category, subcategory
 import { z } from "zod";
 import { userSchema } from "@/events/application/schemas/user-schema";
 import { deviceIdSchema } from "@/events/application/schemas/device-id-schema";
@@ -7,16 +8,16 @@ import { sourceSchema } from "@/events/application/schemas/source-schema";
 import { identitySchema } from "@/events/application/schemas/identity-schema";
 import { urlSchema } from "@/events/application/schemas/url-schema";
 import { salesChannelSchema } from "@/events/application/schemas/sales-channel-schema";
-import { categorySchema } from "@/events/application/schemas/category-schema";
+import { categorySubcategorySchema } from "@/events/application/schemas/category-subcategory-schema";
 
-const categoryDataValidation = z.object({
+const categorySubcategoryDataValidation = z.object({
     apiKey: apiKeySchema,
     source: sourceSchema,
     user: userSchema,
     identity: identitySchema,
     url: urlSchema,
     salesChannel: salesChannelSchema,
-    categories: categorySchema
+    categories: categorySubcategorySchema
 }).and(
     z.union([
         deviceIdSchema,
@@ -24,5 +25,5 @@ const categoryDataValidation = z.object({
     ])
 )
 
-export type defaultInputValidation = z.input<typeof categoryDataValidation>;
-export type defaultOutput = z.output<typeof categoryDataValidation>;
+export type defaultInputValidation = z.input<typeof categorySubcategoryDataValidation>;
+export type defaultOutput = z.output<typeof categorySubcategoryDataValidation>;

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const cartSchema = z
+export const cartTransactionSchema = z
     .object({
         id: z.string({
             invalid_type_error: "id must be a string"

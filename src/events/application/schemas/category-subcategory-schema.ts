@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const categorySchema = z
+export const categorySubcategorySchema = z
     .string({
         required_error: "Categories is required",
         invalid_type_error: "Categories must be a array"

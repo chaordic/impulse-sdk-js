@@ -6,9 +6,9 @@ import { apiKeySchema } from "@/events/application/schemas/api-key-schema";
 import { sourceSchema } from "@/events/application/schemas/source-schema";
 import { identitySchema } from "@/events/application/schemas/identity-schema";
 import { urlSchema } from "@/events/application/schemas/url-schema";
-import { cartSchema } from "@/events/application/schemas/cart-schema";
+import { cartTransactionSchema } from "@/events/application/schemas/cart-transaction-schema";
 
-const cartValidation = z.object({
+const cartTransactionValidation = z.object({
         apiKey: apiKeySchema,
         source: sourceSchema,
         user: userSchema,
@@ -22,8 +22,8 @@ const cartValidation = z.object({
         ])
     )
 .and(
-    cartSchema
+    cartTransactionSchema
 )
 
-export type cartInput = z.input<typeof cartValidation>;
-export type cartOutput = z.output<typeof cartValidation>;
+export type cartInput = z.input<typeof cartTransactionValidation>;
+export type cartOutput = z.output<typeof cartTransactionValidation>;
