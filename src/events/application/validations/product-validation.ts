@@ -16,12 +16,14 @@ const defaultDataValidation = z.object({
     identity: identitySchema,
     url: urlSchema,
     salesChannel: salesChannelSchema
-}).and(
+})
+.and(
     z.union([
         deviceIdSchema,
         infoSchema
     ])
-).and(
+)
+.and(
     productSchema
 )
 

@@ -6,7 +6,8 @@ export const categorySubcategorySchema = z
         invalid_type_error: "Categories must be a array"
     })
     .array()
-    .length(10)
+    .min(1)
+    .max(20)
     .refine(
         (array) => {
             return array.length > 0

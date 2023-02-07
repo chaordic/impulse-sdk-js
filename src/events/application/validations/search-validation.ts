@@ -9,12 +9,12 @@ import { urlSchema } from "@/events/application/schemas/url-schema";
 import { searchSchema } from "@/events/application/schemas/search-schema";
 
 const cartValidation = z.object({
-        apiKey: apiKeySchema,
-        source: sourceSchema,
-        user: userSchema,
-        identity: identitySchema,
-        url: urlSchema
-    })
+    apiKey: apiKeySchema,
+    source: sourceSchema,
+    user: userSchema,
+    identity: identitySchema,
+    url: urlSchema
+})
 .and(
     z.union([
             deviceIdSchema,

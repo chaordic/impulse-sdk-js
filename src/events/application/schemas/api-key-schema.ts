@@ -5,4 +5,6 @@ export const apiKeySchema = z
     .string({
         required_error: "apiKey is required",
         invalid_type_error: "apiKey must be a string"
-    }).default(APIKEY)
+    })
+    .transform(value => value.trim())
+    .transform(value => value === '' ? APIKEY : value )

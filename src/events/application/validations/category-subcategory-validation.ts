@@ -10,6 +10,11 @@ import { urlSchema } from "@/events/application/schemas/url-schema";
 import { salesChannelSchema } from "@/events/application/schemas/sales-channel-schema";
 import { categorySubcategorySchema } from "@/events/application/schemas/category-subcategory-schema";
 
+type InferTypes<Z> = Z extends z.ZodType<infer Output, infer Defs, infer Input> ? [Output, Defs, Input] : [never, never, never];
+type InferOutput<Z> = InferTypes<Z>[0];
+type InferDefs<Z> = InferTypes<Z>[1];
+type InferInput<Z> = InferTypes<Z>[2];
+
 const categorySubcategoryDataValidation = z.object({
     apiKey: apiKeySchema,
     source: sourceSchema,
@@ -18,12 +23,17 @@ const categorySubcategoryDataValidation = z.object({
     url: urlSchema,
     salesChannel: salesChannelSchema,
     categories: categorySubcategorySchema
-}).and(
+})
+.and(
     z.union([
         deviceIdSchema,
         infoSchema
     ])
 )
+function restrict<T, Output, Def extends z.ZodTypeDef, Input = Output>(categorySubcategoryDataValidation: z.ZodType<Output, Def, Input>) {
+    return (t: T) => categorySubcategoryDataValidation.parse(t);
+}
 
-export type defaultInputValidation = z.input<typeof categorySubcategoryDataValidation>;
-export type defaultOutput = z.output<typeof categorySubcategoryDataValidation>;
+export const validate = restrict<Record<string, unknown>, InferOutput<typeof categorySubcategoryDataValidation>, InferDefs<typeof categorySubcategoryDataValidation>, InferInput<typeof categorySubcategoryDataValidation>>(categorySubcategoryDataValidation);
+export type categorySubcategoryInputValidation = z.input<typeof categorySubcategoryDataValidation>;
+export type categorySubcategoryOutputValidation = z.output<typeof categorySubcategoryDataValidation>;

@@ -7,8 +7,11 @@ export const userSchema = z
                 required_error: "id is required",
                 invalid_type_error: "id must be a string"
             })
-            .transform(
-                id => Number(id)
+            .or(
+                z.number({
+                    required_error: "id is required",
+                    invalid_type_error: "id must be a number"
+                })
             ),
         email: z
             .string()

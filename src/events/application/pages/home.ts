@@ -3,15 +3,15 @@ import axios, { AxiosResponse } from "axios";
 import { buildRequest } from "@/events/infrastructure/axios/requests/request-generator";
 import { BASE_URL, HOME_PATH } from "@/events/common/helpers/constants";
 import { DefaultApplicationError } from "@/events/application/errors/default-application-error";
-import { defaultInputValidation } from "@/events/application/validations/default-validation";
+import { DefaultInputValidation, validate } from "@/events/application/validations/default-validation";
 
 export namespace Events {
-    export async function homeViewRequest(data: defaultInputValidation) {
+    export async function homeViewRequest(data: DefaultInputValidation) {
         const options = await buildRequest({
             baseEndpoint: BASE_URL,
             path: HOME_PATH,
             method: "POST",
-            bodyContent: data
+            bodyContent: validate(data)
         });
 
         try {

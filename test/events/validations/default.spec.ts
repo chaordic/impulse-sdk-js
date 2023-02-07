@@ -1,7 +1,8 @@
-import { Events } from "../src/events/application/pages/home"
-import { defaultInputValidation } from "../src/events/application/validations/default-validation"
+import { Events } from "../../../src/events/application/pages/home"
+import { DefaultInputValidation, validate } from "../../../src/events/application/validations/default-validation"
+import { APIKEY } from "../../../src/events/common/helpers/constants";
 
-const mockHomeInput: defaultInputValidation = {
+let mockHomeInput: DefaultInputValidation = {
     apiKey: "api-sample",
     source: "desktop",
     salesChannel: "18",
@@ -27,12 +28,19 @@ const mockHomeInput: defaultInputValidation = {
 }
 
 describe('events', () => {
+    test('should validate the empty apiKey and set the declared default', () => {
+        mockHomeInput.apiKey = ""
+        const data = validate(mockHomeInput)
+        expect(data.apiKey).toEqual(APIKEY);
+    });
     test('should dispatch event by make request viewHome', async () => {
         try {
+            mockHomeInput.apiKey = "api-sample"
             const response: any = await Events.homeViewRequest(mockHomeInput)
             expect(204).toBe(response.status)
         } catch (err: any) {
-            expect(err.message).toBe("Client not found: api-samplee");
+            console.log(err)
+            expect(err.message).toBe(`Client not found: api-sample ${mockHomeInput.apiKey}`);
         }
     })
 })
