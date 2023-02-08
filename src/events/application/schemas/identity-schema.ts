@@ -11,7 +11,8 @@ export const identitySchema = z
             .string({
                 required_error: "browserId is required",
                 invalid_type_error: "browserId must be a string"
-            }),
+            })
+            .uuid(),
         session: z.
             string({
                 invalid_type_error: "session must be a string"

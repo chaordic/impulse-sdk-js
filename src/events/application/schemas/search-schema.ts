@@ -7,7 +7,8 @@ export const searchSchema = z
         }),
         searchId: z.string({
             invalid_type_error: "searchId must be a string"
-        }),
+        })
+        .uuid(),
         items: z.array(
             z.object({
                 pid: z
@@ -16,7 +17,7 @@ export const searchSchema = z
                 }),
             })
         )
-        .length(20)
+        .min(1)
         .transform((array) => array.filter((item) => item.pid))
         .refine(
             (array) => {

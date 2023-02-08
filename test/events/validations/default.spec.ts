@@ -28,6 +28,10 @@ let mockHomeInput: DefaultInputValidation = {
 }
 
 describe('events', () => {
+    test('should validate data otherView, notFoundView, checkoutView', () => {
+        const data = validate(mockHomeInput)
+        expect(data).toEqual(mockHomeInput);
+    });
     test('should validate the empty apiKey and set the declared default', () => {
         mockHomeInput.apiKey = ""
         const data = validate(mockHomeInput)

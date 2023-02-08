@@ -9,7 +9,12 @@ import { urlSchema } from "@/events/application/schemas/url-schema";
 import { salesChannelSchema } from "@/events/application/schemas/sales-channel-schema";
 import { productSchema } from "@/events/application/schemas/product-schema";
 
-const defaultDataValidation = z.object({
+type InferTypes<Z> = Z extends z.ZodType<infer Output, infer Defs, infer Input> ? [Output, Defs, Input] : [never, never, never];
+type InferOutput<Z> = InferTypes<Z>[0];
+type InferDefs<Z> = InferTypes<Z>[1];
+type InferInput<Z> = InferTypes<Z>[2];
+
+const productDataValidation = z.object({
     apiKey: apiKeySchema,
     source: sourceSchema,
     user: userSchema,
@@ -27,5 +32,10 @@ const defaultDataValidation = z.object({
     productSchema
 )
 
-export type defaultInputValidation = z.input<typeof defaultDataValidation>;
-export type defaultOutput = z.output<typeof defaultDataValidation>;
+function restrict<T, Output, Def extends z.ZodTypeDef, Input = Output>(productDataValidation: z.ZodType<Output, Def, Input>) {
+    return (t: T) => productDataValidation.parse(t);
+}
+
+export const validate = restrict<Record<string, unknown>, InferOutput<typeof productDataValidation>, InferDefs<typeof productDataValidation>, InferInput<typeof productDataValidation>>(productDataValidation);
+export type ProductInputValidation = z.infer<typeof productDataValidation>;
+export type ProductOutputValidation = z.input<typeof productDataValidation>;

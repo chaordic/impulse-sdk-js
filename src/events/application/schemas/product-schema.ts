@@ -8,4 +8,5 @@ export const productSchema = z
         price: z.string({
             invalid_type_error: "price must be a string"
         })
+        .transform(Number)
     });
