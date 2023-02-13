@@ -1,4 +1,4 @@
-import { ORIGIN_URL } from "@/events/common/helpers/constants";
+import { ORIGIN_URL } from "@/events/common/helpers/strings/constants";
 import { AxiosHeaders } from "axios";
 import { RequestParams } from "@/events/infrastructure/axios/requests/request-generator";
 

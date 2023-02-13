@@ -1,4 +1,5 @@
-import { CartTransactionInput, validate } from "../../../src/events/application/validations/cart-transaction-validation"
+import { CartTransactionInput, cartTransactionValidation } from "../../../src/events/application/validations/cart-transaction-validation"
+import { Parser } from "../../../src/events/common/helpers/objects/parser";
 
 let mockCartInput: CartTransactionInput = {
     apiKey: "api-sample",
@@ -40,7 +41,7 @@ let mockCartInput: CartTransactionInput = {
 
 describe('events', () => {
     test('should validate the cart', () => {
-        const data = validate(mockCartInput)
+        const data = new Parser(cartTransactionValidation).validate(mockCartInput)
         expect(mockCartInput.items).toEqual(data.items);
     });
 })
