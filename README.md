@@ -1,7 +1,6 @@
 [![Quality Gate Status](http://sonarqube.stg.event.internal/api/project_badges/measure?project=tZormRZZB67EMsA&metric=alert_status)](http://sonarqube.stg.event.internal/dashboard?id=tZormRZZB67EMsA)
 
 [![Coverage](http://sonarqube.stg.event.internal/api/project_badges/measure?project=tZormRZZB67EMsA&metric=coverage)](http://sonarqube.stg.event.internal/dashboard?id=tZormRZZB67EMsA)
-http://sonarqube.stg.event.internal/api/project_badges/measure?project=tZormRZZB67EMsA&metric=coverage
 
 # Linx Impulse Events SDK for TypeScript and JavaScript
 
