@@ -1,4 +1,7 @@
 [![Quality Gate Status](http://sonarqube.stg.event.internal/api/project_badges/measure?project=tZormRZZB67EMsA&metric=alert_status)](http://sonarqube.stg.event.internal/dashboard?id=tZormRZZB67EMsA)
+
+[![Coverage](http://sonarqube.stg.event.internal/api/project_badges/measure?project=tZormRZZB67EMsA&metric=coverage)](http://sonarqube.stg.event.internal/dashboard?id=tZormRZZB67EMsA)
+
 # Linx Impulse Events SDK for TypeScript and JavaScript
 
 This is Events SDK for TypeScript and JavaScript. This project is open source and maintained by Impulse Events.
