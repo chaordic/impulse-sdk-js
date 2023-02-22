@@ -1,6 +1,7 @@
-import { SearchInputValidation, validate } from "../../../src/events/application/validations/search-validation"
+import { SearchInputValidation, searchValidation } from "../../../src/events/application/validations/search-validation"
+import { Parser } from "../../../src/events/common/helpers/objects/parser";
 
-let mockCategoryInput: SearchInputValidation = {
+let mockSearchInput: SearchInputValidation = {
     apiKey: "api-sample",
     source: "desktop",
     info: {
@@ -29,7 +30,7 @@ let mockCategoryInput: SearchInputValidation = {
 
 describe('events', () => {
     test('should validate data searchView', () => {
-        const data = validate(mockCategoryInput)
-        expect(mockCategoryInput.searchId).toEqual(data.searchId);
+        const data = new Parser(searchValidation).validate(mockSearchInput)
+        expect(mockSearchInput.searchId).toEqual(data.searchId);
     });
 })

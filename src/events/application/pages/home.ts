@@ -1,12 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 
 import { buildRequest } from "@/events/infrastructure/axios/requests/request-generator";
-import { BASE_URL, HOME_PATH } from "@/events/common/helpers/constants";
+import { BASE_URL, HOME_PATH } from "@/events/common/helpers/strings/constants";
 import { DefaultApplicationError } from "@/events/application/errors/default-application-error";
-import { DefaultInputValidation, validate } from "@/events/application/validations/default-validation";
+import { DefaultInputValidation, defaultDataValidation } from "@/events/application/validations/default-validation";
+import { Parser } from "@/events/common/helpers/objects/parser";
 
 export namespace Events {
     export async function homeViewRequest(data: DefaultInputValidation, userAgent: string) {
+        const parser = new Parser(defaultDataValidation)
         
         const options = await buildRequest({
             baseEndpoint: BASE_URL,

@@ -1,4 +1,4 @@
-import { APIKEY } from "@/events/common/helpers/constants";
+import { APIKEY } from "@/events/common/helpers/strings/constants";
 import { z } from "zod";
 
 export const apiKeySchema = z

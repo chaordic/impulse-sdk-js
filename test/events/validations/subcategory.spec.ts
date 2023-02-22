@@ -1,4 +1,5 @@
-import { categorySubcategoryInputValidation, validate } from "../../../src/events/application/validations/category-subcategory-validation"
+import { categorySubcategoryInputValidation, categorySubcategoryDataValidation } from "../../../src/events/application/validations/category-subcategory-validation"
+import { Parser } from "../../../src/events/common/helpers/objects/parser";
 
 let mockSubcategoryInput: categorySubcategoryInputValidation = {
     apiKey: "api-sample",
@@ -24,7 +25,7 @@ let mockSubcategoryInput: categorySubcategoryInputValidation = {
 
 describe('events', () => {
     test('should validate data subcategoryView', () => {
-        const data = validate(mockSubcategoryInput)
+        const data = new Parser(categorySubcategoryDataValidation).validate(mockSubcategoryInput)
         expect(mockSubcategoryInput.categories).toEqual(data.categories);
     });
 })

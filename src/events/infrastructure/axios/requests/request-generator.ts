@@ -1,4 +1,4 @@
-import { formatDateToRFC3339 } from "@/events/common/helpers/formatDateToRFC3339";
+import { formatDateToRFC3339 } from "@/events/common/helpers/date/formatDateToRFC3339";
 import { buildHeaders } from "@/events/infrastructure/axios/headers/headers-generator";
 import { AxiosRequestConfig, AxiosHeaders } from "axios";
 

@@ -1,7 +1,9 @@
 import { Events } from "../../../src/events/application/pages/home"
-import { DefaultInputValidation, validate } from "../../../src/events/application/validations/default-validation"
-import { APIKEY } from "../../../src/events/common/helpers/constants";
-import { detectDevice } from "../../../src/events/common/helpers/detectDevice";
+import { DefaultInputValidation, defaultDataValidation } from "../../../src/events/application/validations/default-validation"
+import { APIKEY } from "../../../src/events/common/helpers/strings/constants";
+import { Parser } from "../../../src/events/common/helpers/objects/parser";
+
+const HttpStatusCodeNoContent = 204
 
 let mockHomeInput: DefaultInputValidation = {
     apiKey: "api-sample",
@@ -30,14 +32,16 @@ let mockHomeInput: DefaultInputValidation = {
 
 describe('events', () => {
     test('should validate data otherView, notFoundView, checkoutView', () => {
-        const data = validate(mockHomeInput)
-        expect(data).toEqual(mockHomeInput);
+        const parser = new Parser(defaultDataValidation)
+        // console.log(parser.validate(mockHomeInput))        
+        // const data = validate(mockHomeInput)
+        expect(parser.validate(mockHomeInput)).toEqual(mockHomeInput);
     });
 
     test('should validate the empty apiKey and set the declared default', () => {
         mockHomeInput.apiKey = ""
-        const data = validate(mockHomeInput)
-        expect(data.apiKey).toEqual(APIKEY);
+        const parser = new Parser(defaultDataValidation).validate(mockHomeInput)
+        expect(parser.apiKey).toEqual(APIKEY);
     });
 
     test('should dispatch event by make request viewHome', async () => {
@@ -45,7 +49,8 @@ describe('events', () => {
             mockHomeInput.apiKey = "api-sample"
             const userAgent = detectDevice('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36');
             const response: any = await Events.homeViewRequest(mockHomeInput, userAgent)
-            expect(204).toBe(response.data.status)
+            expect(HttpStatusCodeNoContent).toBe(response.status)
+
         } catch (err: any) {
             console.log(err)
             expect(err.message).toBe(`Client not found: api-sample ${mockHomeInput.apiKey}`);
