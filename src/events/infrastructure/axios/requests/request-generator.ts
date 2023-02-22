@@ -34,6 +34,7 @@ export interface RequestParams {
   readonly headerParams?: Params;
   readonly queryParams?: Params;
   readonly formParam?: Params;
+  readonly userAgent?: string;
 }
 
 export async function buildRequest(params: RequestParams): Promise<AxiosRequestConfig> {

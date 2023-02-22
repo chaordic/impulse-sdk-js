@@ -6,17 +6,19 @@ import { DefaultApplicationError } from "@/events/application/errors/default-app
 import { DefaultInputValidation, validate } from "@/events/application/validations/default-validation";
 
 export namespace Events {
-    export async function homeViewRequest(data: DefaultInputValidation) {
+    export async function homeViewRequest(data: DefaultInputValidation, userAgent: string) {
+        
         const options = await buildRequest({
             baseEndpoint: BASE_URL,
             path: HOME_PATH,
             method: "POST",
-            bodyContent: validate(data)
-        });
+            bodyContent: validate(data),
+            userAgent
+        });                
 
         try {
-            const response: AxiosResponse = await axios.request(options)
-
+            const response: AxiosResponse = await axios.request(options)                                
+            
             return {
                 data: response.data,
                 status: response.status,

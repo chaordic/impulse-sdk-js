@@ -1,6 +1,7 @@
 import { Events } from "../../../src/events/application/pages/home"
 import { DefaultInputValidation, validate } from "../../../src/events/application/validations/default-validation"
 import { APIKEY } from "../../../src/events/common/helpers/constants";
+import { detectDevice } from "../../../src/events/common/helpers/detectDevice";
 
 let mockHomeInput: DefaultInputValidation = {
     apiKey: "api-sample",
@@ -24,7 +25,7 @@ let mockHomeInput: DefaultInputValidation = {
         browserId: "fb4e49b6-35e3-42a1-a397-960f0b37ab6a",
         session: "1670871998688-0.43341696150224984"
     },
-    url: "https://www.api-sample.com.br/"
+    url: "https://www.api-sample.com.br/",    
 }
 
 describe('events', () => {
@@ -32,19 +33,38 @@ describe('events', () => {
         const data = validate(mockHomeInput)
         expect(data).toEqual(mockHomeInput);
     });
+
     test('should validate the empty apiKey and set the declared default', () => {
         mockHomeInput.apiKey = ""
         const data = validate(mockHomeInput)
         expect(data.apiKey).toEqual(APIKEY);
     });
+
     test('should dispatch event by make request viewHome', async () => {
         try {
             mockHomeInput.apiKey = "api-sample"
-            const response: any = await Events.homeViewRequest(mockHomeInput)
-            expect(204).toBe(response.status)
+            const userAgent = detectDevice('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36');
+            const response: any = await Events.homeViewRequest(mockHomeInput, userAgent)
+            expect(204).toBe(response.data.status)
         } catch (err: any) {
             console.log(err)
             expect(err.message).toBe(`Client not found: api-sample ${mockHomeInput.apiKey}`);
         }
     })
+        
+    test('should detect device', async () => {        
+        const userAgent = detectDevice('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36');
+        const response: any = await Events.homeViewRequest(mockHomeInput, userAgent)                
+        const headers = response.config.headers        
+        let device;
+        for (const key in headers) {
+            if (Object.prototype.hasOwnProperty.call(headers, key)) {
+                const element = headers[key];
+                if (key === "x-device-type") {
+                    device = element
+                }                
+            }
+        }        
+        expect(device).toBe("desktop")        
+    })        
 })
