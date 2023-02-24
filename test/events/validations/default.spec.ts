@@ -2,7 +2,7 @@ import { Events } from "../../../src/events/application/pages/home"
 import { DefaultInputValidation, defaultDataValidation } from "../../../src/events/application/validations/default-validation"
 import { APIKEY } from "../../../src/events/common/helpers/strings/constants";
 import { Parser } from "../../../src/events/common/helpers/objects/parser";
-
+import { detectDevice } from "../../../src/events/common/helpers/strings/detectDevice";
 const HttpStatusCodeNoContent = 204
 
 let mockHomeInput: DefaultInputValidation = {
@@ -57,19 +57,16 @@ describe('events', () => {
         }
     })
         
-    test('should detect device', async () => {        
-        const userAgent = detectDevice('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36');
-        const response: any = await Events.homeViewRequest(mockHomeInput, userAgent)                
-        const headers = response.config.headers        
-        let device;
-        for (const key in headers) {
-            if (Object.prototype.hasOwnProperty.call(headers, key)) {
-                const element = headers[key];
-                if (key === "x-device-type") {
-                    device = element
-                }                
-            }
-        }        
-        expect(device).toBe("desktop")        
-    })        
+    test('should detect device desktop', async () => {
+        const userAgent = detectDevice('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36');        
+        const response: any = await Events.homeViewRequest(mockHomeInput, userAgent)
+        expect(response.config.headers['x-device-type']).toBe("desktop");
+        
+    })
+
+    test('should detect device mobile', async () => {
+        const userAgent = detectDevice('Mozilla/5.0 (Linux; Android 10; SM-G973F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Mobile Safari/537.36');
+        const response: any = await Events.homeViewRequest(mockHomeInput, userAgent)        
+        expect(response.config.headers['x-device-type']).toBe("mobile");
+    })
 })

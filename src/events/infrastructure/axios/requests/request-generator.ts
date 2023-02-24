@@ -33,8 +33,7 @@ export interface RequestParams {
   readonly pathParams?: Params;
   readonly headerParams?: Params;
   readonly queryParams?: Params;
-  readonly formParam?: Params;
-  readonly userAgent?: string;
+  readonly formParam?: Params;  
 }
 
 export async function buildRequest(params: RequestParams): Promise<AxiosRequestConfig> {

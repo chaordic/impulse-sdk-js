@@ -3,11 +3,11 @@ import { AxiosHeaders } from "axios";
 import { RequestParams } from "@/events/infrastructure/axios/requests/request-generator";
 
 export function buildHeaders(params: RequestParams): AxiosHeaders {
-    const headers: AxiosHeaders = new AxiosHeaders()             
-    
+    const headers: AxiosHeaders = new AxiosHeaders()
+    const deviceType: any = params.headerParams    
     headers.set('Content-Type', 'application/json');
     headers.set('Origin', ORIGIN_URL);
-    headers.set('x-device-type', params.userAgent);
+    headers.set('x-device-type', deviceType);
  
     if (params.headerParams) {
       for (const [key, value] of Object.entries(params.headerParams)) {

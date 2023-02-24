@@ -6,21 +6,20 @@ import { DefaultApplicationError } from "@/events/application/errors/default-app
 import { DefaultInputValidation, defaultDataValidation } from "@/events/application/validations/default-validation";
 import { Parser } from "@/events/common/helpers/objects/parser";
 
-export namespace Events {
-    export async function homeViewRequest(data: DefaultInputValidation, userAgent: string) {
+export namespace Events {    
+    export async function homeViewRequest(data: DefaultInputValidation, headerParams: any) {
         const parser = new Parser(defaultDataValidation)
         
         const options = await buildRequest({
             baseEndpoint: BASE_URL,
             path: HOME_PATH,
             method: "POST",
-            bodyContent: validate(data),
-            userAgent
+            bodyContent: parser.validate(data),
+            headerParams,
         });                
 
         try {
-            const response: AxiosResponse = await axios.request(options)                                
-            
+            const response: AxiosResponse = await axios.request(options)
             return {
                 data: response.data,
                 status: response.status,
