@@ -10,7 +10,8 @@
   "scripts": {
     "build": "rimraf dist && ./node_modules/typescript/bin/tsc",
     "test": "jest --no-cache --watchAll --colors",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "build:vite": "vite build"
   },
   "keywords": [],
   "author": {
