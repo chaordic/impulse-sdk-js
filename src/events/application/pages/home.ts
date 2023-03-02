@@ -5,18 +5,15 @@ import { BASE_URL, HOME_PATH } from "@/events/common/helpers/strings/constants";
 import { DefaultApplicationError } from "@/events/application/errors/default-application-error";
 import { DefaultInputValidation, defaultDataValidation } from "@/events/application/validations/default-validation";
 import { Parser } from "@/events/common/helpers/objects/parser";
-import { detectDevice } from "@/events/common/helpers/strings/detectDevice";
 
 export namespace Events {    
-    export async function homeViewRequest(data: DefaultInputValidation, headerParams: any) {
+    export async function homeViewRequest(data: DefaultInputValidation) {
         const parser = new Parser(defaultDataValidation)
-        const header: any = detectDevice(headerParams)        
         const options = await buildRequest({
             baseEndpoint: BASE_URL,
             path: HOME_PATH,
             method: "POST",
-            bodyContent: parser.validate(data),
-            headerParams: header
+            bodyContent: parser.validate(data)            
         });                
 
         try {

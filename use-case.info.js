@@ -6,8 +6,8 @@ const port = 3000;
 
 const data = {
   apiKey: "api-sample",
-  source: "",
-  salesChannel: "",
+  source: "desktop",
+  salesChannel: "desktop",
   user: {
     id: "15078217",
     name: "Teste Linx Impulse",
@@ -31,10 +31,8 @@ const data = {
 
 
 const server = http.createServer((req, res) => {
-  try {
-  const userAgent = req.headers['user-agent'];
-  console.log(userAgent);
-  Events.homeViewRequest(data, userAgent).then((result) => {
+  try {  
+  Events.homeViewRequest(data).then((result) => {
     console.log(result);    
   });    
 } catch (error) {

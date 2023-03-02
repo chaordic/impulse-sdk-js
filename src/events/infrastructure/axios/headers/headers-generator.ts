@@ -1,10 +1,12 @@
 import { ORIGIN_URL } from "@/events/common/helpers/strings/constants";
 import { AxiosHeaders } from "axios";
 import { RequestParams } from "@/events/infrastructure/axios/requests/request-generator";
+import { detectDevice } from "@/events/common/helpers/strings/detectDevice";                
 
 export function buildHeaders(params: RequestParams): AxiosHeaders {
     const headers: AxiosHeaders = new AxiosHeaders()
-    const deviceType: any = params.headerParams    
+    const headerDevice: any = params.headerParams;
+    const deviceType: any = detectDevice(headerDevice)    
     headers.set('Content-Type', 'application/json');
     headers.set('Origin', ORIGIN_URL);
     headers.set('x-device-type', deviceType);
