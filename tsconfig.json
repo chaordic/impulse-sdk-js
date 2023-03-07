@@ -16,5 +16,8 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node"
   },
-  "exclude": ["node_modules", "test/", "jest.config.js"]
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "exclude": ["node_modules", "test", "jest.config.js", "coverage", "dist"]
 }

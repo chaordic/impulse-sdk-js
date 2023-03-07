@@ -5,8 +5,42 @@ import { BASE_URL, HOME_PATH } from "@/events/common/helpers/strings/constants";
 import { DefaultApplicationError } from "@/events/application/errors/default-application-error";
 import { DefaultInputValidation, defaultDataValidation } from "@/events/application/validations/default-validation";
 import { Parser } from "@/events/common/helpers/objects/parser";
+import { EventBuilder } from "@/events/application/ports/builder/event-builder";
 
 export namespace Events {
+
+    type Params = {
+        [key: string]: any
+    }    
+    export class Home implements EventBuilder {
+        private data: Params = {};
+        
+        user?<T>(user: Array<T>): this {
+            this.data["user"] = user;
+            return this
+        }
+        identify<T>(identify: Array<T>): this {
+            this.data["identify"] = identify;
+            return this
+        }
+        info<T>(info: Array<T>): this {
+            this.data["info"] = info;
+            return this
+        }
+        salesChannel(salesChannel: string): this {
+            this.data["salesChannel"] = salesChannel;
+            return this
+        }
+        source(source: string): this {
+            this.data["source"] = source;
+            return this
+        }
+        url(url: string): this {
+            this.data["url"] = url || "buildRelativeUrl";
+            return this
+        }
+    }
+
     export async function homeViewRequest(data: DefaultInputValidation) {
         const parser = new Parser(defaultDataValidation)
         

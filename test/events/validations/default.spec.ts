@@ -1,6 +1,6 @@
 import { Events } from "../../../src/events/application/pages/home"
 import { DefaultInputValidation, defaultDataValidation } from "../../../src/events/application/validations/default-validation"
-import { APIKEY } from "../../../src/events/common/helpers/strings/constants";
+import { API_KEY } from "../../../src/events/common/helpers/strings/constants";
 import { Parser } from "../../../src/events/common/helpers/objects/parser";
 
 const HttpStatusCodeNoContent = 204
@@ -40,7 +40,7 @@ describe('events', () => {
     test('should validate the empty apiKey and set the declared default', () => {
         mockHomeInput.apiKey = ""
         const parser = new Parser(defaultDataValidation).validate(mockHomeInput)
-        expect(parser.apiKey).toEqual(APIKEY);
+        expect(parser.apiKey).toEqual(API_KEY);
     });
     test('should dispatch event by make request viewHome', async () => {
         try {

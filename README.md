@@ -1,6 +1,10 @@
+![ts](https://badgen.net/badge/-/TypeScript?icon=typescript&label&labelColor=blue&color=555555)
+![ts](https://img.shields.io/badge/Jest-323330?logo=Jest&label&labelColor=blue&color=555555)
+
 [![Quality Gate Status](http://sonarqube.stg.event.internal/api/project_badges/measure?project=tZormRZZB67EMsA&metric=alert_status)](http://sonarqube.stg.event.internal/dashboard?id=tZormRZZB67EMsA)
 
 [![Coverage](http://sonarqube.stg.event.internal/api/project_badges/measure?project=tZormRZZB67EMsA&metric=coverage)](http://sonarqube.stg.event.internal/dashboard?id=tZormRZZB67EMsA)
+
 
 # Linx Impulse Events SDK for TypeScript and JavaScript
 

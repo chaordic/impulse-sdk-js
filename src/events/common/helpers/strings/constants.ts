@@ -12,5 +12,6 @@ export const CART_PATH = "/cart";
 export const TRANSACTION_PATH = "/transaction";
 export const EMPTYSEARCH_PATH = "/emptysearch";
 
-export const APIKEY = "api-sample";
+export const API_KEY = "api-sample";
+export const SECRET_KEY = "api-sample12345=";
 export const ORIGIN_URL = "http://www.api-sample.com.br";
