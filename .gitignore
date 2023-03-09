@@ -5,3 +5,5 @@ dist
 .npmrc
 coverage
 /.scannerwork
+yarn.lock
+dist
