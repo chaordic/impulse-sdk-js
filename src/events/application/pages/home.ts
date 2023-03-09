@@ -31,6 +31,10 @@ export namespace Events {
             this.data["salesChannel"] = salesChannel;
             return this
         }
+        deviceId(deviceId: string): this {
+            this.data["deviceId"] = deviceId;
+            return this
+        }
         source(source: string): this {
             this.data["source"] = source;
             return this

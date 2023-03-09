@@ -1,6 +1,6 @@
 import { isBrowser } from "./isBrowser";
 
-export const getSystemInfo = () => {
+export const getSystemInfo = (): string => {
     if (isBrowser()) 
         return window.navigator.userAgent
 

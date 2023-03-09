@@ -12,6 +12,8 @@ export const CART_PATH = "/cart";
 export const TRANSACTION_PATH = "/transaction";
 export const EMPTYSEARCH_PATH = "/emptysearch";
 
-export const API_KEY = "api-sample";
-export const SECRET_KEY = "api-sample12345=";
-export const ORIGIN_URL = "http://www.api-sample.com.br";
+export const API_KEY = "sephora-br";
+export const SECRET_KEY = "sephora-br12345=";
+export const ORIGIN_URL = "https://www.api-sample.com.br";
+export const SUITE_URL = "https://suite.linximpulse.net/impulse/";
+export const FLAGS_PATH = "/flags.json";
