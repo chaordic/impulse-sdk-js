@@ -12,7 +12,7 @@ declare global {
 const impulse: any = {}
 globalThis.impulseCache = new CacheContainer(new MemoryStorage())
 
-async function init(): Promise<any | Error> {
+async function initialize(): Promise<any | Error> {
 
     return await new CacheService().getById(API_KEY).then(async (cached) => {
         if (!cached) {
@@ -37,7 +37,7 @@ async function init(): Promise<any | Error> {
 }
 
 export default function(): any {
-    init().then(() => {
+    initialize().then(() => {
         impulse.initialized = true
     })    
 };

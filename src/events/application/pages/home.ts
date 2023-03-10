@@ -6,6 +6,7 @@ import { DefaultApplicationError } from "@/events/application/errors/default-app
 import { DefaultInputValidation, defaultDataValidation } from "@/events/application/validations/default-validation";
 import { Parser } from "@/events/common/helpers/objects/parser";
 import { EventBuilder } from "@/events/application/ports/builder/event-builder";
+import { buildRelativeUrl } from "@/events/common/helpers/strings/buildRelativeUrl";
 
 export namespace Events {
 
@@ -40,7 +41,7 @@ export namespace Events {
             return this
         }
         url(url: string): this {
-            this.data["url"] = url || "buildRelativeUrl";
+            this.data["url"] = url || buildRelativeUrl();
             return this
         }
     }
