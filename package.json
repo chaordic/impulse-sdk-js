@@ -11,7 +11,8 @@
     "build": "rimraf dist && ./node_modules/typescript/bin/tsc",
     "test": "jest --no-cache --watchAll --colors",
     "test:coverage": "jest --coverage",
-    "build:vite": "vite build"
+    "build:vite": "vite build",
+    "build:esbuild": "rimraf dist && esbuild src/index.ts --bundle --platform=node --target=node14 --format=cjs --outfile=dist/bundle.js"
   },
   "keywords": [],
   "author": {
@@ -24,6 +25,7 @@
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.12",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
+    "esbuild": "^0.17.11",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^23.0.0",
