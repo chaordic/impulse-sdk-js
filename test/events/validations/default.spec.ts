@@ -1,4 +1,4 @@
-import { Events } from "../../../src/events/application/pages/home"
+import * as Impulse from "../../../src/index"
 import { DefaultInputValidation, defaultDataValidation } from "../../../src/events/application/validations/default-validation"
 import { API_KEY } from "../../../src/events/common/helpers/strings/constants";
 import { Parser } from "../../../src/events/common/helpers/objects/parser";
@@ -27,7 +27,7 @@ let mockHomeInput: DefaultInputValidation = {
         browserId: "fb4e49b6-35e3-42a1-a397-960f0b37ab6a",
         session: "1670871998688-0.43341696150224984"
     },
-    url: "https://www.api-sample.com.br/"
+    url: "https://www.sephora.com.br/"
 }
 
 describe('events', () => {
@@ -44,12 +44,12 @@ describe('events', () => {
     });
     test('should dispatch event by make request viewHome', async () => {
         try {
-            mockHomeInput.apiKey = "api-sample"
-            const response: any = await Events.homeViewRequest(mockHomeInput)
+            mockHomeInput.apiKey = "sephora-br"
+            const response: any = await Impulse.Events.homeView.send(mockHomeInput)
             expect(HttpStatusCodeNoContent).toBe(response.status)
         } catch (err: any) {
             console.log(err)
-            expect(err.message).toBe(`Client not found: api-sample ${mockHomeInput.apiKey}`);
+            expect(err.message).toBe(`Client not found: ${mockHomeInput.apiKey}`);
         }
     })
 })
