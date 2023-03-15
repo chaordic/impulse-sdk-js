@@ -4,7 +4,7 @@ import { ZodError } from "zod";
 import { buildRequest } from "@/events/infrastructure/axios/requests/request-generator";
 import { BASE_URL, HOME_PATH } from "@/events/common/helpers/strings/constants";
 import { DefaultApplicationError } from "@/events/application/errors/default-application-error";
-import { DefaultInputValidation, defaultDataValidation } from "@/events/application/validations/default-validation";
+import { cartTransactionValidation } from "@/events/application/validations/cart-transaction-validation";
 import { Parser } from "@/events/common/helpers/objects/parser";
 import { EventBuilder } from "@/events/application/ports/builder/event-builder";
 import { buildRelativeUrl } from "@/events/common/helpers/strings/buildRelativeUrl";
@@ -12,8 +12,9 @@ import { DefaultValidationError } from "@/events/application/errors/default-vali
 
 type Params = {
     [key: string]: any
-}    
-export class Home implements EventBuilder {
+}
+
+export class Cart implements EventBuilder {
     private data: Params = {};
     
     user?<T>(user: Array<T>): this {
@@ -44,17 +45,25 @@ export class Home implements EventBuilder {
         this.data["url"] = url || buildRelativeUrl();
         return this
     }
+    id(id: string): this {
+        this.data["id"] = id;
+        return this
+    }
+    items<T>(items: Array<T>): this {
+        this.data["items"] = items;
+        return this
+    }
 }
 
-export async function send(data: any): Promise<any | Error> {
+export async function send(data: any): Promise<any | Error> {    
     try {
-        const parser = new Parser(defaultDataValidation)        
+        const parser = new Parser(cartTransactionValidation)        
         const options = await buildRequest({
             baseEndpoint: BASE_URL,
             path: HOME_PATH,
             method: "POST",
             bodyContent: parser.validate(data)
-        });
+        });    
         const response: AxiosResponse = await axios.request(options)
 
         return {
@@ -67,7 +76,7 @@ export async function send(data: any): Promise<any | Error> {
         if (err instanceof ZodError) {
             throw new DefaultValidationError(err.message)
         }
-        
+
         const lastKnownError = {
             data: err.response.data,
             status: err.response.status,

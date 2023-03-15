@@ -1,11 +1,11 @@
 import * as Impulse from "../../../src/index"
-import { DefaultInputValidation, defaultDataValidation } from "../../../src/events/application/validations/default-validation"
+import { defaultDataValidation } from "../../../src/events/application/validations/default-validation"
 import { API_KEY } from "../../../src/events/common/helpers/strings/constants";
 import { Parser } from "../../../src/events/common/helpers/objects/parser";
 
 const HttpStatusCodeNoContent = 204
 
-let mockHomeInput: DefaultInputValidation = {
+let mockHomeInput = {
     apiKey: "api-sample",
     source: "desktop",
     salesChannel: "18",
