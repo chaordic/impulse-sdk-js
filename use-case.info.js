@@ -1,4 +1,4 @@
-const { Events } = require("./old-dist/bundle.js");
+const { Events } = require("./dist/bundle.js");
 
 const http = require('http');
 const hostname = '127.0.0.1';
@@ -32,12 +32,12 @@ const data = {
 
 const server = http.createServer((req, res) => {
   try {  
-  Events.homeViewRequest(data).then((result) => {
-    console.log(result);    
-  });    
-} catch (error) {
-  console.log(error);
-}
+    Events.homeViewRequest(data).then((result) => {
+      console.log(result);    
+    });    
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 server.listen(port, hostname, () => {

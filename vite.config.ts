@@ -24,12 +24,9 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
             rollupOptions: {
                 external: Object.keys(dependencies),
             },
-            minify: false,
-            umdModuleIds: {
-                axios: "axios"
-            },
+            minify: false,            
             commonjsOptions: {
-                include: [/axios/, /node_modules/],
+                include: [/node_modules/],
             },
         },
     
@@ -42,14 +39,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
                 },
               ]
             })
-        ],
-        rollupOptions: {
-            external: ['axios'],
-            output: {
-              globals: {
-                axios: 'axios',
-              },
-            },
-        },
+        ],        
     }
 })
