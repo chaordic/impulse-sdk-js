@@ -10,6 +10,7 @@
   "scripts": {
     "build": "rimraf dist && ./node_modules/typescript/bin/tsc",
     "test": "jest --no-cache --watchAll --colors",
+    "deploy": "rimraf dist && ./node_modules/typescript/bin/tsc && changeset && changeset version && changeset publish && git push && git push origin --tag",
     "test:coverage": "jest --coverage"
   },
   "keywords": [],

@@ -7,12 +7,15 @@ import { MemoryStorage } from "node-ts-cache-storage-memory";
 
 declare global {
     var impulseCache: any
+    var impulse: any
 }
 
-const impulse: any = {}
 globalThis.impulseCache = new CacheContainer(new MemoryStorage())
+globalThis.impulse = {}
 
 async function initialize(): Promise<any | Error> {
+
+    //set deviceId
 
     return await new CacheService().getById(API_KEY).then(async (cached) => {
         if (!cached) {
@@ -21,17 +24,16 @@ async function initialize(): Promise<any | Error> {
                     throw new Error(`Client ${API_KEY}: not enabled Flags`);            
                 }
 
-                impulse.flags = flags
-                const content = { deviceId: uuidv4(), flags: flags }
+                globalThis.impulse.flags = flags
+                const content = { sdkId: uuidv4(), flags: flags }
 
                 return await new CacheService().setById(API_KEY, content, 60).then((data) => {
-                    impulse.deviceId = data.deviceId
+                    globalThis.impulse.sdkId = data.deviceId
                 })
             })
         }
         
-        impulse.flags = cached.flags
-        impulse.deviceId = cached.deviceId
+        globalThis.impulse.flags = cached.flags
         return true
     })
 }

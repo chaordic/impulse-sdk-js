@@ -62,7 +62,7 @@ export async function send(data: any): Promise<any | Error> {
             status: response.status,
             statusText: response.statusText,
             config: response.config
-        }            
+        }
     } catch (err: any) {
         if (err instanceof ZodError) {
             throw new DefaultValidationError(err.message)

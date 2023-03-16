@@ -1,4 +1,4 @@
-import { isBrowser } from "./isBrowser";
+import { isBrowser } from "@/events/common/helpers/strings/isBrowser";
 
 export const buildRelativeUrl = (): string | null | boolean => {
     if (!isBrowser()) {

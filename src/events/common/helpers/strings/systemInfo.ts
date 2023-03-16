@@ -1,6 +1,6 @@
-import { isBrowser } from "./isBrowser";
+import { isBrowser } from "@/events/common/helpers/strings/isBrowser";
 
-export const getSystemInfo = (): string => {
+export function getSystemInfo(): string {
     if (isBrowser()) 
         return window.navigator.userAgent
 

@@ -1,5 +1,7 @@
-import { API_KEY } from "@/events/common/helpers/strings/constants";
+import { API_KEY } from '@/events/common/helpers/strings/constants';
 import { getSystemInfo } from "@/events/common/helpers/strings/systemInfo";
+import { setCookie } from "@/events/common/helpers/strings/cookie";
+import { v4 as uuidv4 } from 'uuid';
 
 type Params<T> = {
     new (...args: any[]): T;
@@ -28,7 +30,7 @@ export class EventConstructor {
             impulseSuiteCookie: null
         }
         this.pageData.default["identity"] = {
-            session: null
+            session: setCookie('linx_session', uuidv4())
         }
         this.pageData.default["userAgent"] = getSystemInfo()
     }
