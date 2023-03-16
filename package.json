@@ -1,6 +1,6 @@
 {
   "name": "@chaordic/impulse-sdk-js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist-types/index.d.ts",
@@ -10,6 +10,8 @@
   "scripts": {
     "build": "rimraf dist && ./node_modules/typescript/bin/tsc",
     "test": "jest --no-cache --watchAll --colors",
+    "deploy": "rimraf dist && ./node_modules/typescript/bin/tsc && changeset && changeset version && changeset publish && git push && git push origin --tag",
+    "deploys": "changeset version && prettier --write --parser json '**/package.json'",
     "test:coverage": "jest --coverage"
   },
   "keywords": [],
@@ -37,6 +39,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
+    "@changesets/cli": "^2.26.0",
     "@types/uuid": "^9.0.1",
     "axios": "^1.2.2",
     "node-ts-cache-storage-memory": "^4.4.0",
