@@ -24,11 +24,10 @@ async function initialize(): Promise<any | Error> {
                     throw new Error(`Client ${API_KEY}: not enabled Flags`);            
                 }
 
-                globalThis.impulse.flags = flags
-                const content = { sdkId: uuidv4(), flags: flags }
+                const content = { clientSdkId: uuidv4(), flags: flags }
 
                 return await new CacheService().setById(API_KEY, content, 60).then((data) => {
-                    globalThis.impulse.sdkId = data.deviceId
+                    globalThis.impulse.clientSdkId = data.clientSdkId
                 })
             })
         }

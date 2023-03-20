@@ -6,7 +6,8 @@ export function buildHeaders(params: RequestParams): AxiosHeaders {
     const headers: AxiosHeaders = new AxiosHeaders()
   
     headers.set('Content-Type', 'application/json');
-    headers.set('Origin', ORIGIN_URL);
+    headers.set('Origin', ORIGIN_URL); //remove because userAgent defalut requests, lambda!
+    headers.set('X-Origin', ORIGIN_URL);
   
     if (params.headerParams) {
       for (const [key, value] of Object.entries(params.headerParams)) {

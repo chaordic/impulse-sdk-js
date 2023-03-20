@@ -8,9 +8,10 @@
     "node": "18.x"
   },
   "scripts": {
-    "build": "rimraf dist && ./node_modules/typescript/bin/tsc",
+    "build": "rimraf dist-types && ./node_modules/typescript/bin/tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
     "test": "jest --no-cache --watchAll --colors",
     "deploy": "rimraf dist && ./node_modules/typescript/bin/tsc && changeset && changeset version && changeset publish && git push && git push origin --tag",
+    "build:webpack": "rimraf dist-es && webpack --mode production",
     "test:coverage": "jest --coverage"
   },
   "keywords": [],
@@ -33,9 +34,12 @@
     "jest": "^29.3.1",
     "prettier": "^2.8.1",
     "ts-jest": "^29.0.3",
+    "ts-loader": "^9.4.2",
+    "tsc-alias": "^1.8.3",
     "tsconfig": "^7.0.0",
     "typedoc": "^0.23.22",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "@changesets/cli": "^2.26.0",
@@ -44,6 +48,7 @@
     "node-ts-cache-storage-memory": "^4.4.0",
     "ts-log": "^2.2.5",
     "uuid": "^9.0.0",
+    "webpack": "^5.76.2",
     "zod": "^3.20.2"
   },
   "repository": {
@@ -54,6 +59,6 @@
     "registry": "https://npm.pkg.github.com/chaordic"
   },
   "files": [
-    "dist"
+    "dist-*"
   ]
 }

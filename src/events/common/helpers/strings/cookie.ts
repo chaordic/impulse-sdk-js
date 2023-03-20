@@ -11,7 +11,7 @@ export function setCookie(name: string, content: string): string | null {
         if (browserCookie) {
             return browserCookie
         }
-        document.cookie = name + "=" + content + ";expires=" + date.toUTCString() + ";path=/";
+        document.cookie = name + "=" + content + ";expires=" + date.toUTCString() + ";SameSite=None" + ";path=/";
         return content
     }
     return null

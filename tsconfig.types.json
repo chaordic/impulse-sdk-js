@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "outDir": "dist-types",
+    "removeComments": false,
+    "declaration": true,
+    "declarationDir": "dist-types",
+    "emitDeclarationOnly": true
+  }
+}

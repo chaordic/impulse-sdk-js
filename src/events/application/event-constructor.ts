@@ -1,5 +1,7 @@
 import { API_KEY } from '@/events/common/helpers/strings/constants';
 import { getSystemInfo } from "@/events/common/helpers/strings/systemInfo";
+import { buildReferrerUrl } from "@/events/common/helpers/strings/buildReferrerUrl";
+import { buildDeviceType } from "@/events/common/helpers/strings/buildDeviceType";
 import { setCookie } from "@/events/common/helpers/strings/cookie";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -7,15 +9,17 @@ type Params<T> = {
     new (...args: any[]): T;
 }
 
+const UUID = uuidv4()
+
 export class EventConstructor {
     pageData: any
-    pageName!: string
+    pageName!: any
     
     constructor(EventClass: Params<any>) {
         this.pageData = new EventClass;
         
         (async (): Promise<this> => {
-            this.pageName = EventClass.name
+            this.pageName = EventClass.name // return in browser ""
             this.setDefault()
             
             return this;
@@ -26,12 +30,14 @@ export class EventConstructor {
         this.pageData["default"] = { apiKey: API_KEY }
         this.pageData.default["page"] = this.pageName
         this.pageData.default["info"] = {
-            pageViewId: null,
-            impulseSuiteCookie: null
+            referrer: buildReferrerUrl(),
+            pageViewId: setCookie('chaordic_browserId', UUID),
+            impulseSuiteCookie: setCookie('chaordic_browserId', UUID)
         }
         this.pageData.default["identity"] = {
-            session: setCookie('linx_session', uuidv4())
+            session: setCookie('impulsesuite_session', new Date().getTime() + '-' + Math.random()),
+            browserId: setCookie('chaordic_browserId', UUID)
         }
-        this.pageData.default["userAgent"] = getSystemInfo()
+        this.pageData.default["source"] = buildDeviceType(getSystemInfo())
     }
 }

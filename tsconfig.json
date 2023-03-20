@@ -1,16 +1,20 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "commonjs",
+    "target": "ES6",
+    "module": "CommonJS",
     "baseUrl": "src",
+    "downlevelIteration": true,
     "paths": {
       "@/*": ["*"],
     },
     "rootDir": "src",
+    "importHelpers": true,
+    "incremental": true,
+    "useUnknownInCatchVariables": false,
     "allowJs": true,
-    "outDir": "dist",
     "esModuleInterop": true,
     "strict": true,
+    "removeComments": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
@@ -20,5 +24,5 @@
   "ts-node": {
     "require": ["tsconfig-paths/register"]
   },
-  "exclude": ["node_modules", "test", "jest.config.js", "coverage", "dist"]
+  "exclude": ["node_modules", "test", "jest.config.js", "webpack.config.js", "coverage", "dist/**/*", "dist-es/**/*", "dist-types/**/*"]
 }

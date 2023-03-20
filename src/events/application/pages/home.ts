@@ -4,7 +4,7 @@ import { ZodError } from "zod";
 import { buildRequest } from "@/events/infrastructure/axios/requests/request-generator";
 import { BASE_URL, HOME_PATH } from "@/events/common/helpers/strings/constants";
 import { DefaultApplicationError } from "@/events/application/errors/default-application-error";
-import { DefaultInputValidation, defaultDataValidation } from "@/events/application/validations/default-validation";
+import { defaultDataValidation } from "@/events/application/validations/default-validation";
 import { Parser } from "@/events/common/helpers/objects/parser";
 import { EventBuilder } from "@/events/application/ports/builder/event-builder";
 import { buildRelativeUrl } from "@/events/common/helpers/strings/buildRelativeUrl";
@@ -55,6 +55,7 @@ export async function send(data: any): Promise<any | Error> {
             method: "POST",
             bodyContent: parser.validate(data)
         });
+        
         const response: AxiosResponse = await axios.request(options)
 
         return {
