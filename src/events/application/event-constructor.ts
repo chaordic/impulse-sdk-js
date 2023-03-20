@@ -13,7 +13,7 @@ const UUID = uuidv4()
 
 export class EventConstructor {
     pageData: any
-    pageName!: any
+    pageName!: string
     
     constructor(EventClass: Params<any>) {
         this.pageData = new EventClass;
