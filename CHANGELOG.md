@@ -1,5 +1,11 @@
 # @chaordic/impulse-sdk-js
 
+## 1.0.5
+
+### Patch Changes
+
+- 7f4969f: builds configs
+
 ## 1.0.4
 
 ### Patch Changes
