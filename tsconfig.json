@@ -4,7 +4,7 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "baseUrl": "src",
-    "outDir": "dist",
+    "outDir": "dist-cjs",
     "downlevelIteration": true,
     "paths": {
       "@/*": ["*"],
