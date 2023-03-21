@@ -60,6 +60,7 @@
     "registry": "https://npm.pkg.github.com/chaordic"
   },
   "files": [
+    "dist",
     "dist-*"
   ]
 }
