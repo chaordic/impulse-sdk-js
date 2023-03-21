@@ -8,10 +8,11 @@
     "node": "18.x"
   },
   "scripts": {
-    "build": "rimraf dist-types && ./node_modules/typescript/bin/tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
-    "test": "jest --no-cache --watchAll --colors",
+    "build": "rimraf dist && ./node_modules/typescript/bin/tsc && tsc-alias",
+    "build:types": "rimraf dist-types && ./node_modules/typescript/bin/tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
+    "build:webpack": "rimraf dist-esm && rimraf dist-cjs && webpack --mode production",
     "deploy": "rimraf dist && ./node_modules/typescript/bin/tsc && changeset && changeset version && changeset publish && git push && git push origin --tag",
-    "build:webpack": "rimraf dist-es && webpack --mode production",
+    "test": "jest --no-cache --watchAll --colors",
     "test:coverage": "jest --coverage"
   },
   "keywords": [],

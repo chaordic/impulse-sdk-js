@@ -2,7 +2,8 @@ node_modules
 /.history
 .env
 dist
-dist-es
+dist-esm
+dist-cjs
 dist-types
 .npmrc
 coverage
