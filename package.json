@@ -1,6 +1,6 @@
 {
   "name": "@chaordic/impulse-sdk-js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist-types/index.d.ts",
@@ -11,7 +11,7 @@
     "build": "rimraf dist && ./node_modules/typescript/bin/tsc && tsc-alias",
     "build:types": "rimraf dist-types && ./node_modules/typescript/bin/tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
     "build:webpack": "rimraf dist-esm && rimraf dist-cjs && webpack --mode production",
-    "deploy": "rimraf dist && ./node_modules/typescript/bin/tsc && changeset && changeset version && changeset publish && git push && git push origin --tag",
+    "deploy": "changeset && changeset version && changeset publish && git push && git push origin --tag",
     "test": "jest --no-cache --watchAll --colors",
     "test:coverage": "jest --coverage"
   },
