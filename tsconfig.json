@@ -26,5 +26,16 @@
   "ts-node": {
     "require": ["tsconfig-paths/register"]
   },
-  "exclude": ["node_modules", "test", "jest.config.js", "webpack.config.js", "coverage", "dist/**/*", "dist-esm/**/*", "dist-cjs/**/*", "dist-types/**/*"]
+  "exclude": [
+    "node_modules",
+    "test",
+    "jest.config.js",
+    "webpack.config.js",
+    "coverage",
+    "examples",
+    "dist/**/*",
+    "dist-esm/**/*",
+    "dist-cjs/**/*",
+    "dist-types/**/*"
+  ]
 }
