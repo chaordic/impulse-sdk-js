@@ -1,5 +1,11 @@
 # @chaordic/impulse-sdk-js
 
+## 1.0.4
+
+### Patch Changes
+
+- 8ceeff9: add dist foder package.json
+
 ## 1.0.3
 
 ### Patch Changes
