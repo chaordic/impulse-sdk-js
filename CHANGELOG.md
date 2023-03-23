@@ -1,5 +1,11 @@
 # @chaordic/impulse-sdk-js
 
+## 1.0.8
+
+### Patch Changes
+
+- 18a641f: fix: folder dist-cjs
+
 ## 1.0.7
 
 ### Patch Changes
