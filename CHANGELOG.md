@@ -1,5 +1,11 @@
 # @chaordic/impulse-sdk-js
 
+## 1.0.7
+
+### Patch Changes
+
+- 469b651: fix detect Browser
+
 ## 1.0.6
 
 ### Patch Changes
