@@ -1,4 +1,4 @@
-import * as Impulse from "../../../src/index"
+import * as linx from "../../../src/index"
 import { defaultDataValidation } from "../../../src/events/application/validations/default-validation"
 import { API_KEY } from "../../../src/events/common/helpers/strings/constants";
 import { Parser } from "../../../src/events/common/helpers/objects/parser";
@@ -19,7 +19,7 @@ describe('events', () => {
     test('should dispatch event by make request viewHome', async () => {
         try {
             mockHomeInput.apiKey = "sephora-br"
-            const response: any = await Impulse.Events.homeView.send(mockHomeInput)
+            const response: any = await linx.impulse.events.homeView(mockHomeInput)
             expect(HttpStatusCodeNoContent).toBe(response.status)
         } catch (err: any) {
             console.log(err)

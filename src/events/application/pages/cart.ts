@@ -21,8 +21,8 @@ export class Cart implements EventBuilder {
         this.data["user"] = user;
         return this
     }
-    identify<T>(identify: Array<T>): this {
-        this.data["identify"] = identify;
+    identity<T>(identity: Array<T>): this {
+        this.data["identity"] = identity;
         return this
     }
     info<T>(info: Array<T>): this {

@@ -1,4 +1,4 @@
-import * as Impulse from "../../src/index";
+import * as linx from "../../src/index";
 
 import { EventConstructor } from "../../src/events/application/event-constructor";
 import { Home } from "../../src/events/application/pages/home";
@@ -19,14 +19,14 @@ describe('events', () => {
         expect("buildRelativeUrl").toEqual(home.pageData.data.url);
     });
     test('should dispatch event send request homeView', async () => {
-        const response = await Impulse.Events.homeView.send(mockHomeInput)
+        const response = await linx.impulse.events.homeView(mockHomeInput)
         expect(HttpStatusCodeNoContent).toBe(response.status)
     })
     test('should dispatch event send request cartView', async () => {
-        const response = await Impulse.Events.cartView.send(mockCartInput)
+        const response = await linx.impulse.events.cartView(mockCartInput)
         expect(HttpStatusCodeNoContent).toBe(response.status)
     })
-    test('should identify name cookies browser', () => {
+    test('should identity name cookies browser', () => {
         const parseCookie = parseBrowserCookies(mockCookie)
         const cookie = getCookie('legacy_p', parseCookie)
         expect('aaaa6582-d969-4207-8b5b-41562be59669').toBe(cookie)
