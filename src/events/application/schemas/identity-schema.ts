@@ -18,4 +18,5 @@ export const identitySchema = z
                 invalid_type_error: "session must be a string"
             })
             .optional()
-    });
+    })
+    .optional();

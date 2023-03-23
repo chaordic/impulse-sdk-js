@@ -1,7 +1,7 @@
 import { CartTransactionInput, cartTransactionValidation } from "../../../src/events/application/validations/cart-transaction-validation"
 import { Parser } from "../../../src/events/common/helpers/objects/parser";
 
-let mockTransactionInput: CartTransactionInput = {
+let mockTransactionInput = {
     apiKey: "api-sample",
     source: "desktop",
     info: {
