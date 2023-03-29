@@ -9,6 +9,7 @@ import { sourceSchema } from "@/events/application/schemas/source-schema";
 import { identitySchema } from "@/events/application/schemas/identity-schema";
 import { urlSchema } from "@/events/application/schemas/url-schema";
 import { salesChannelSchema } from "@/events/application/schemas/sales-channel-schema";
+import { pageSchema } from "@/events/application/schemas/page-schema";
 
 export const defaultDataValidation = z.object({
     apiKey: apiKeySchema,
@@ -16,7 +17,8 @@ export const defaultDataValidation = z.object({
     user: userSchema,
     identity: identitySchema,
     url: urlSchema,
-    salesChannel: salesChannelSchema
+    salesChannel: salesChannelSchema,
+    page: pageSchema
 })
 .and(
     z.union([
