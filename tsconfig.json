@@ -20,7 +20,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ESNext", "DOM"],
+    // "lib": ["ESNext", "DOM"],
     "experimentalDecorators": true
   },
   "ts-node": {

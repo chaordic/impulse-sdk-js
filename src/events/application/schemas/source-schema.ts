@@ -5,3 +5,4 @@ export const sourceSchema = z
         required_error: "source is required",
         invalid_type_error: "source must be a desktop|mobile|app"
     })
+    .default("desktop")

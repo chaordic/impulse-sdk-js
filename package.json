@@ -12,7 +12,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "build": "rimraf dist-cjs && ./node_modules/typescript/bin/tsc && tsc-alias",
+    "build": "rimraf dist-cjs && rimraf tsconfig.tsbuildinfo && ./node_modules/typescript/bin/tsc && tsc-alias",
     "build:types": "rimraf dist-types && ./node_modules/typescript/bin/tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
     "build:webpack": "rimraf dist-esm && webpack --mode production",
     "deploy": "changeset && changeset version && changeset publish && git push && git push origin --tag",

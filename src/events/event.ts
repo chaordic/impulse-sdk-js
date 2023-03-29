@@ -6,8 +6,8 @@ import { CacheContainer } from "node-ts-cache";
 import { MemoryStorage } from "node-ts-cache-storage-memory";
 
 declare global {
-    var impulseCache: any
-    var impulse: any
+    var impulseCache: CacheContainer
+    var impulse: {[key: string]: any}
 }
 
 globalThis.impulseCache = new CacheContainer(new MemoryStorage())
@@ -27,12 +27,16 @@ async function initialize(): Promise<any | Error> {
                 const content = { clientSdkId: uuidv4(), flags: flags }
 
                 return await new CacheService().setById(API_KEY, content, 60).then((data) => {
-                    globalThis.impulse.clientSdkId = data.clientSdkId
+                    Object.assign(globalThis.impulse, {
+                        clientSdkId: data.clientSdkId
+                    })
                 })
             })
         }
-        
-        globalThis.impulse.flags = cached.flags
+
+        Object.assign(globalThis.impulse, {
+            flags: cached.flags
+        })
         return true
     })
 }

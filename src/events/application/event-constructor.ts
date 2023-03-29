@@ -15,13 +15,13 @@ const UUID = uuidv4()
 
 export class EventConstructor {
     pageData: {[key: string]: any}
-    pageName!: string
+    pageName!: string | null
     
     constructor(EventClass: Params<any>) {
         this.pageData = new EventClass;
         
         (async (): Promise<this> => {
-            this.pageName = EventClass.name // return in browser ""
+            this.pageName = EventClass.name || null // return in browser ""
             this.setDefault()
             
             return this;
@@ -31,11 +31,11 @@ export class EventConstructor {
     setDefault() {
         this.pageData.default = {
             apiKey: API_KEY,
-            page: this.pageName || null
+            page: this.pageName
         }
 
         if (isBrowser()) {
-            this.pageData.default = {
+            const definitions = {
                 info: {
                     referrer: buildReferrerUrl(),
                     pageViewId: setCookie('chaordic_browserId', UUID),
@@ -47,6 +47,8 @@ export class EventConstructor {
                 },
                 source: buildDeviceType(getSystemInfo())
             }
+
+            Object.assign(this.pageData.default, definitions)
         }
     }
 }
