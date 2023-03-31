@@ -9,6 +9,7 @@ import { identitySchema } from "@/events/application/schemas/identity-schema";
 import { urlSchema } from "@/events/application/schemas/url-schema";
 import { salesChannelSchema } from "@/events/application/schemas/sales-channel-schema";
 import { categorySubcategorySchema } from "@/events/application/schemas/category-subcategory-schema";
+import { tagSchema } from "@/events/application/schemas/tag-schema";
 
 export const categorySubcategoryDataValidation = z.object({
     apiKey: apiKeySchema,
@@ -17,7 +18,8 @@ export const categorySubcategoryDataValidation = z.object({
     identity: identitySchema,
     url: urlSchema,
     salesChannel: salesChannelSchema,
-    categories: categorySubcategorySchema
+    categories: categorySubcategorySchema,
+    tag: tagSchema
 })
 .and(
     z.union([
