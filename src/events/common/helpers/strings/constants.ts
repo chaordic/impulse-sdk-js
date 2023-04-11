@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.event.linximpulse.net/v7/events/views";
+export const BASE_URL = new URL("https://api.event.linximpulse.net/v7/events/views")
 
 export const HOME_PATH = "/home";
 export const SEARCH_PATH = "/search";
@@ -11,7 +11,7 @@ export const CART_PATH = "/cart";
 export const TRANSACTION_PATH = "/transaction";
 export const EMPTYSEARCH_PATH = "/emptysearch";
 
-export const SUITE_URL = "https://suite.linximpulse.net/impulse/";
+export const SUITE_URL = new URL("https://suite.linximpulse.net/impulse/")
 export const FLAGS_PATH = "/flags.json";
 
 //client config, extract .env

@@ -1,3 +1,4 @@
 export function isBrowser(): boolean {  
-  return typeof window !== 'undefined' &&  window.document &&  window.document.nodeType === 9
+  const DOCUMENT_NODE = 9
+  return typeof window !== 'undefined' &&  window.document &&  window.document.nodeType === DOCUMENT_NODE
 }

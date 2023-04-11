@@ -12,7 +12,8 @@ export const tagSchema = z
             return array.length > 0
         },
         {
-            message: 'Categories must have at least 1 item'
+            message: 'Tags must have at least 1 item'
         }
     )
     .optional()
+    

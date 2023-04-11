@@ -1,8 +1,8 @@
 import { isBrowser } from "@/events/common/helpers/strings/isBrowser";
 
-const date = new Date();
-
 export function setCookie(name: string, content: string): string | null {
+    const date = new Date();
+
     date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000)); //+1 day (= 1 year)
 
     if (isBrowser()) {
