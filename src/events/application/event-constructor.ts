@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { isBrowser } from "@/events/common/helpers/strings/isBrowser";
 import { API_KEY } from '@/events/common/helpers/strings/constants';
 import { getSystemInfo } from "@/events/common/helpers/strings/systemInfo";
-import { buildReferrerUrl } from "@/events/common/helpers/strings/buildReferrerUrl";
+import { getReferrer } from "@/events/common/helpers/strings/buildUrl";
 import { buildDeviceType } from "@/events/common/helpers/strings/buildDeviceType";
 import { setCookie } from "@/events/common/helpers/strings/cookie";
 
@@ -12,6 +12,14 @@ type Params<T> = {
 }
 
 const UUID = uuidv4()
+
+export interface IEvent {
+    apiKey: string,
+    secretKey: string,
+    retryPolicy: string,
+    sendAsBeacon: boolean,
+    source: string
+}
 
 export class EventConstructor {
     pageData: {[key: string]: any}
@@ -37,7 +45,7 @@ export class EventConstructor {
         if (isBrowser()) {
             const definitions = {
                 info: {
-                    referrer: buildReferrerUrl(),
+                    referrer: getReferrer(),
                     pageViewId: setCookie('chaordic_browserId', UUID),
                     impulseSuiteCookie: setCookie('chaordic_browserId', UUID)
                 },
