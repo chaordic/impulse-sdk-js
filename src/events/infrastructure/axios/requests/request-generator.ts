@@ -1,5 +1,4 @@
 import { AxiosRequestConfig, AxiosHeaders } from "axios";
-import { URL } from "url";
 
 export type RequestParamValue = string
     | Date
