@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { ZodError } from "zod";
 
-import { buildRequest } from "@/events/infrastructure/axios/requests/request-generator";
+import { Request } from "@/events/infrastructure/axios/requests/request-generator";
 import { BASE_URL } from "@/events/common/helpers/strings/constants";
 import { LinxImpulseError } from "@/events/application/errors/linx-impulse-error";
 import { defaultDataValidation } from "@/events/application/validations/default-validation";
@@ -18,13 +18,14 @@ export class EventService {
 
     async send(): Promise<any | Error> {
         try {
-            const parser = new Parser(defaultDataValidation)        
-            const options = await buildRequest({
-                baseEndpoint: BASE_URL.href,
-                path: `/${this.path}`,
-                method: "POST",
-                bodyContent: parser.validate(this.data)
-            });
+            const parser = new Parser(defaultDataValidation)
+            
+            const options = await new Request(
+                new URL(`${BASE_URL.href}/${this.path}`),
+                'POST',
+                parser.validate(this.data)
+            )
+            .build();
             
             const response: AxiosResponse = await axios.request(options)
     
