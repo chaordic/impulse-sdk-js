@@ -6,7 +6,6 @@ export const tagSchema = z
     })
     .array()
     .min(1)
-    .max(20)
     .refine(
         (array) => {
             return array.length > 0

@@ -22,7 +22,9 @@ export const cartTransactionSchema = z
                 quantity: z
                     .string({
                         invalid_type_error: "quantity must be a string"
-                })
+                    
+                    })
+                    .transform(Number)
             })
             .partial({
                 sku: true,
@@ -34,7 +36,6 @@ export const cartTransactionSchema = z
             )
         )
         .min(1)
-        .max(20)
         .transform((array) => array.filter((item) => item.pid))
         .refine(
             (array) => {

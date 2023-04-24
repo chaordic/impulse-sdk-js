@@ -1,7 +1,8 @@
 import { EventBuilder } from "@/events/application/ports/builder/event-builder";
 import { getRelativeUrl } from "@/events/common/helpers/strings/buildUrl";
 import { EventService } from "@/events/common/services/Event";
-import { IEvent } from "@/events/application/event-constructor";
+import { IEvent } from "@/events/application/ports/event/event";
+import { defaultDataValidation } from "@/events/application/validations/default-validation";
 
 type HomeParams = {
     [key: string]: any
@@ -11,12 +12,13 @@ export class Home extends EventService implements EventBuilder {
     public data: HomeParams = {};
     
     constructor(params: IEvent) {
-        super('home');        
+        super('home', defaultDataValidation);        
         this.data = {
             apiKey: params.apiKey,
             secretKey: params.secretKey,
             source: params.source
         }
+        this.setDefault();
     }
 
     user(user: object): this {
@@ -30,7 +32,7 @@ export class Home extends EventService implements EventBuilder {
     }
 
     info(info: object): this {
-        this.data.info = info;
+        this.data.info = info
         return this
     }
 
