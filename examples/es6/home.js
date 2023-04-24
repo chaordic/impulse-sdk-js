@@ -1,16 +1,19 @@
 //example ES6 Event homeView
-import "./dist-esm/bundle.js";
+import { Home } from "@chaordic/impulse-sdk-js"
 
-const homeClass = impulse.pages.home
-const home = new impulse.events.constructor(homeClass)
+const home = new Home({
+    apiKey: 'my-apiKey',
+    secretKey: 'my-secret-key',
+    retryPolicy: 'exponential',
+    sendAsBeacon: true,
+    source: 'mobile'
+})
 
-home.pageData
-    .source("desktop")
-    .url()
-    .deviceId("fb4e49b6-35e3-42a1-a397-960f0b37ab6a")
+home
+    .user({'id': '123', email: 'test@linx.com.br'})
+    .deviceId('fb4e49b6-35e3-42a1-a397-960f0b37ab6a')
+    .url('https://test.com')
+    .send()
+    .then((res) => console.log(res.status))
 
-const homeMergedData = { ...home.pageData.data, ...home.pageData.default };
-
-impulse.events.homeView(homeMergedData).then((res) => console.log(k, res.status))
-
-console.log(home, homeMergedData)
+console.log(home)
