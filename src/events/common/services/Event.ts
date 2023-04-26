@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { ZodError } from "zod";
+import { ZodError, ZodType } from "zod";
 
 import { Request } from "@/events/infrastructure/axios/requests/request-generator";
 import { BASE_URL } from "@/events/common/helpers/strings/constants";
@@ -12,15 +12,17 @@ import { setCookie } from "@/events/common/helpers/strings/cookie";
 import { buildDeviceType } from "@/events/common/helpers/strings/buildDeviceType";
 import { getSystemInfo } from "@/events/common/helpers/strings/systemInfo";
 import { getUuid as UUID } from "@/events/common/helpers/strings/uuid";
+import { IEvent } from "@/events/application/ports/event/event";
 
 export class EventService {
     data: any;
     path: string;
-    validationSchema: any;
+    validationSchema: ZodType;
 
-    constructor(path: string, validation: any) {
-        this.path = path
-        this.validationSchema = validation
+    constructor(path: string, validation: ZodType, params?: IEvent) {
+        this.path = path;
+        this.validationSchema = validation;
+        console.log(params)
     }
 
     async send(): Promise<any | Error> {
@@ -59,6 +61,13 @@ export class EventService {
     }
 
     setDefault() {
+        // this.data.test = 'entryPoint';
+        // this.data = {
+        //     apiKey: 'params.apiKey',
+        //     secretKey: 'params.secretKey',
+        //     source: 'params.source'
+        // }
+
         if (isBrowser()) {
             this.data.info = {
                 referrer: getReferrer(),

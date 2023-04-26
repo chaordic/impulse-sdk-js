@@ -64,7 +64,7 @@ export class Request {
   }
 }
 
-export function setHeaders(headerParams: RequestParamValue): AxiosHeaders {
+function setHeaders(headerParams: RequestParamValue): AxiosHeaders {
   const headers: AxiosHeaders = new AxiosHeaders()
 
   headers.set('Content-Type', 'application/json');

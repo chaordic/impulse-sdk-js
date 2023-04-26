@@ -20,3 +20,5 @@ export const identitySchema = z
             .optional()
     })
     .optional();
+
+export type IdentityInput = z.input<typeof identitySchema>;

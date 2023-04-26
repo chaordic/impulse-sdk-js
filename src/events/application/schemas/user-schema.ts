@@ -31,3 +31,5 @@ export const userSchema = z
             })
             .optional()
     }).optional()
+
+export type UserInput = z.input<typeof userSchema>;

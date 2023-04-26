@@ -21,10 +21,14 @@ export const defaultDataValidation = z.object({
     page: pageSchema
 })
 .and(
-    z.union([
-        deviceIdSchema,
-        infoSchema
-    ])
+    z.object({
+        deviceId: deviceIdSchema
+    })
+    .or(
+        z.object({
+            info: infoSchema
+        })        
+    )
 )
 
 export type DefaultInputValidation = z.infer<typeof defaultDataValidation>;
