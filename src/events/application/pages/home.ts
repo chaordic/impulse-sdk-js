@@ -18,14 +18,8 @@ type HomeParams = {
 export class Home extends EventService implements EventBuilder {
     public data: HomeParams = {};
     
-    constructor(params: IEvent) {
-        super('home', defaultDataValidation, params);
-        this.data = {
-            apiKey: params.apiKey,
-            secretKey: params.secretKey,
-            source: params.source
-        }
-        this.setDefault();
+    constructor(eventParams: IEvent) {
+        super('home', defaultDataValidation, eventParams);
     }
 
     user(user: UserInput): this {

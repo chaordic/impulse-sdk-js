@@ -6,26 +6,22 @@ import { BASE_URL } from "@/events/common/helpers/strings/constants";
 import { LinxImpulseError } from "@/events/application/errors/linx-impulse-error";
 import { Parser } from "@/events/common/helpers/objects/parser";
 import { ValidationError } from "@/events/application/errors/validation-error";
-import { isBrowser } from "@/events/common/helpers/strings/isBrowser";
-import { getReferrer } from "@/events/common/helpers/strings/buildUrl";
-import { setCookie } from "@/events/common/helpers/strings/cookie";
-import { buildDeviceType } from "@/events/common/helpers/strings/buildDeviceType";
-import { getSystemInfo } from "@/events/common/helpers/strings/systemInfo";
-import { getUuid as UUID } from "@/events/common/helpers/strings/uuid";
 import { IEvent } from "@/events/application/ports/event/event";
-
 export class EventService {
-    data: any;
-    path: string;
-    validationSchema: ZodType;
+    readonly config: IEvent;
+    readonly data: any;
+    readonly path: string;
+    readonly validationSchema: ZodType;
 
-    constructor(path: string, validation: ZodType, params?: IEvent) {
+    constructor(path: string, validation: ZodType, config: IEvent) {
         this.path = path;
         this.validationSchema = validation;
-        console.log(params)
+        this.config = config
     }
 
     async send(): Promise<any | Error> {
+        Object.assign(this.data, this.config)
+        
         try {
             const parser = new Parser(this.validationSchema)
             
@@ -57,30 +53,6 @@ export class EventService {
             }
             console.error(`Request failed with Exception : ${JSON.stringify(lastKnownError)}\n`)
             throw new LinxImpulseError(err.response.data.message);
-        }
-    }
-
-    setDefault() {
-        // this.data.test = 'entryPoint';
-        // this.data = {
-        //     apiKey: 'params.apiKey',
-        //     secretKey: 'params.secretKey',
-        //     source: 'params.source'
-        // }
-
-        if (isBrowser()) {
-            this.data.info = {
-                referrer: getReferrer(),
-                pageViewId: setCookie('chaordic_browserId', UUID()),
-                impulseSuiteCookie: setCookie('chaordic_browserId', UUID())
-            };
-
-            this.data.identity = {
-                session: setCookie('impulsesuite_session', `${new Date().getTime()}-${Math.random()}`),
-                browserId: setCookie('chaordic_browserId', UUID())
-            };
-
-            this.data.source = buildDeviceType(getSystemInfo())
         }
     }
 }

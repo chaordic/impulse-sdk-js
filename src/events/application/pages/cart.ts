@@ -17,15 +17,9 @@ type CartParams = {
 
 export class Cart extends EventService implements EventBuilder {
     public data: CartParams = {};
-    
-    constructor(params: IEvent) {
-        super('cart', cartTransactionValidation);        
-        this.data = {
-            apiKey: params.apiKey,
-            secretKey: params.secretKey,
-            source: params.source
-        }
-        this.setDefault();
+
+    constructor(eventParams: IEvent) {
+        super('cart', cartTransactionValidation, eventParams);
     }
 
     user(user: UserInput): this {
