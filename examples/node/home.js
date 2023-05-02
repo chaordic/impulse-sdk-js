@@ -1,19 +1,27 @@
 //Example node Event homeview
-import { Home } from "@chaordic/impulse-sdk-js"
+import { Event } from "@chaordic/impulse-sdk-js"
 
-const home = new Home({
-    apiKey: 'my-apiKey',
+const event = new Event({
+    apiKey: 'my-apikey',
     secretKey: 'my-secret-key',
     retryPolicy: 'exponential',
     sendAsBeacon: true,
-    source: 'mobile'
+    source: 'app',
+    deviceId: 'fb4e49b6-35e3-42a1-a397-960f0b37ab6a'
 })
 
-home
-    .user({'id': '123', email: 'test@linx.com.br'})
-    .deviceId('fb4e49b6-35e3-42a1-a397-960f0b37ab6a')
-    .url('https://test.com')
+const cart = event.cart()
+    .user({'id': '123', email: 'test@linx.net'})
+    .url('https://teste.com')
+    .id('123456')
+    .items([
+        {
+            pid: "PID_123456",
+            sku: "SKU_123456",
+            quantity: "2"
+        }
+    ])
     .send()
     .then((res) => console.log(res.status))
 
-console.log(home)
+console.log(cart)
