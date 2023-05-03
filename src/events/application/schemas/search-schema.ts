@@ -17,7 +17,6 @@ export const searchSchema = z
                 }),
             })
         )
-        .min(1)
         .transform((array) => array.filter((item) => item.pid))
         .refine(
             (array) => {
