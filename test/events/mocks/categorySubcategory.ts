@@ -1,6 +1,6 @@
 import { categorySubcategoryInputValidation } from "../../../src/events/application/validations/category-subcategory-validation"
 
-export const mockCategoryInput: categorySubcategoryInputValidation = {
+export const mockCategoryInput = {
     apiKey: "api-sample",
     source: "desktop",
     info: {
@@ -18,7 +18,7 @@ export const mockCategoryInput: categorySubcategoryInputValidation = {
     categories: [{ id: "1", name: "moveis" }, { id: "1", name: "moveis" }]
 }
 
-export const mockSubcategoryInput: categorySubcategoryInputValidation = {
+export const mockSubcategoryInput = {
     apiKey: "api-sample",
     source: "desktop",
     info: {

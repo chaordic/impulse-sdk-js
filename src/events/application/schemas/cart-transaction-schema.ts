@@ -20,11 +20,10 @@ export const cartTransactionSchema = z
                         invalid_type_error: "price must be a string"
                     }),
                 quantity: z
-                    .string({
-                        invalid_type_error: "quantity must be a string"
+                    .number({
+                        invalid_type_error: "quantity must be a number"
                     
                     })
-                    .transform(Number)
             })
             .partial({
                 sku: true,

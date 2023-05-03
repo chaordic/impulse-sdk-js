@@ -22,10 +22,14 @@ export const categorySubcategoryDataValidation = z.object({
     tag: tagSchema
 })
 .and(
-    z.union([
-        deviceIdSchema,
-        infoSchema
-    ])
+    z.object({
+        deviceId: deviceIdSchema
+    })
+    .or(
+        z.object({
+            info: infoSchema
+        })        
+    )
 )
 
 export type categorySubcategoryInputValidation = z.input<typeof categorySubcategoryDataValidation>;

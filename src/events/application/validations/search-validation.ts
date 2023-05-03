@@ -16,10 +16,14 @@ export const searchValidation = z.object({
     url: urlSchema
 })
 .and(
-    z.union([
-        deviceIdSchema,
-        infoSchema
-    ])
+    z.object({
+        deviceId: deviceIdSchema
+    })
+    .or(
+        z.object({
+            info: infoSchema
+        })        
+    )
 )
 .and(
     searchSchema

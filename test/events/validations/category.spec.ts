@@ -8,7 +8,7 @@ describe('events', () => {
         expect(category.categories).toEqual(data.categories);
     });
     test('should validate data categoryView array strings', () => {
-        category.categories = ["moveis", "mdf"]
+        category.categories = [{ id: "123", name: "moveis"}]
         const data = new Parser(categorySubcategoryDataValidation).validate(category)
         expect(category.categories).toEqual(data.categories);
     });

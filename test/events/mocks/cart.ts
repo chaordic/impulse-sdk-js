@@ -26,12 +26,12 @@ export const mockCartInput = {
         {
             pid: "PID_123456",
             sku: "SKU_123456",
-            quantity: "2"
+            quantity: 2
         },
         {
             pid: "PID_456",
             sku: "SKU_456",
-            quantity: "1"
+            quantity: 1
         }
     ]
 }

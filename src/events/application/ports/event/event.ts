@@ -5,8 +5,8 @@ export interface IEvent {
     secretKey: string,
     retryPolicy: string,
     sendAsBeacon: boolean,
-    source: string,
-    deviceId: string
+    source?: string,
+    deviceId?: string
 }
 
 export class Event {
