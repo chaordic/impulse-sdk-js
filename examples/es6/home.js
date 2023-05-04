@@ -15,5 +15,3 @@ const home = event.home()
     .url('https://teste.com')
     .send()
     .then((res) => console.log(res.status))
-
-console.log(home)

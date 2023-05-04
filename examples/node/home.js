@@ -23,5 +23,3 @@ const cart = event.cart()
     ])
     .send()
     .then((res) => console.log(res.status))
-
-console.log(cart)
