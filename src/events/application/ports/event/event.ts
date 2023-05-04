@@ -2,7 +2,7 @@ import { Cart } from "@/events/application/pages/cart";
 import { Home } from "@/events/application/pages/home";
 export interface IEvent {
     apiKey: string,
-    secretKey: string,
+    secretKey?: string,
     retryPolicy: string,
     sendAsBeacon: boolean,
     source?: string,
