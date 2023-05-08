@@ -15,18 +15,10 @@ export const cartTransactionValidation = z.object({
     user: userSchema,
     identity: identitySchema,
     url: urlSchema,
-    salesChannel: salesChannelSchema
+    salesChannel: salesChannelSchema,
+    deviceId: deviceIdSchema,
+    info: infoSchema
 })
-.and(
-    z.object({
-        deviceId: deviceIdSchema
-    })
-    .or(
-        z.object({
-            info: infoSchema
-        })        
-    )
-)
 .and(
     cartTransactionSchema
 )

@@ -2,7 +2,7 @@ import { EventBuilder } from "@/events/application/ports/builder/event-builder";
 import { getRelativeUrl } from "@/events/common/helpers/strings/buildUrl";
 import { EventService } from "@/events/common/services/Event";
 import { IEvent } from "@/events/application/ports/event/event";
-import { cartTransactionValidation } from "@/events/application/validations/cart-transaction-validation";
+import { CartTransactionOutput, cartTransactionValidation } from "@/events/application/validations/cart-transaction-validation";
 import { DeviceInput } from "@/events/application/schemas/device-id-schema";
 import { IdentityInput } from "@/events/application/schemas/identity-schema";
 import { InfoInput } from "@/events/application/schemas/info-schema";
@@ -10,10 +10,9 @@ import { SalesChannelInput } from "@/events/application/schemas/sales-channel-sc
 import { SourceInput } from "@/events/application/schemas/source-schema";
 import { UrlInput } from "@/events/application/schemas/url-schema";
 import { UserInput } from "@/events/application/schemas/user-schema";
+import { CartId, CartItems } from "@/events/application/schemas/cart-transaction-schema";
 
-type CartParams = {
-    [key: string]: any
-}
+type CartParams = Partial<CartTransactionOutput>
 
 export class Cart extends EventService implements EventBuilder {
     public data: CartParams = {};
@@ -57,11 +56,12 @@ export class Cart extends EventService implements EventBuilder {
         return this
     }
 
-    id(id: string): this {
+    id(id: CartId): this {
         this.data.id = id;
         return this
     }
-    items(items: object): this {
+    
+    items(items: CartItems): this {
         this.data.items = items;
         return this
     }

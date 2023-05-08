@@ -1,5 +1,3 @@
-//home, not_found, other, landing_page, hotsite, checkout
-
 import { z } from "zod";
 import { userSchema } from "@/events/application/schemas/user-schema";
 import { deviceIdSchema } from "@/events/application/schemas/device-id-schema";
@@ -18,18 +16,10 @@ export const defaultDataValidation = z.object({
     identity: identitySchema,
     url: urlSchema,
     salesChannel: salesChannelSchema,
-    page: pageSchema
+    page: pageSchema,
+    deviceId: deviceIdSchema,
+    info: infoSchema
 })
-.and(
-    z.object({
-        deviceId: deviceIdSchema
-    })
-    .or(
-        z.object({
-            info: infoSchema
-        })        
-    )
-)
 
 export type DefaultInputValidation = z.infer<typeof defaultDataValidation>;
-export type DefaultOutput = z.output<typeof defaultDataValidation>;
+export type DefaultOutputValidation = z.output<typeof defaultDataValidation>;

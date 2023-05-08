@@ -45,3 +45,6 @@ export const cartTransactionSchema = z
             }
         )
     });
+
+export type CartId = z.infer<typeof cartTransactionSchema.shape.id>;
+export type CartItems = z.infer<typeof cartTransactionSchema.shape.items>;  

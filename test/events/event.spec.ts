@@ -51,7 +51,7 @@ describe('events', () => {
                 {
                     pid: "PID_123456",
                     sku: "SKU_123456",
-                    quantity: "2"
+                    quantity: 2
                 }
             ])
             .url('https://teste.com')

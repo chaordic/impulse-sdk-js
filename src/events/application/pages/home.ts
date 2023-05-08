@@ -2,7 +2,7 @@ import { EventBuilder } from "@/events/application/ports/builder/event-builder";
 import { getRelativeUrl } from "@/events/common/helpers/strings/buildUrl";
 import { EventService } from "@/events/common/services/Event";
 import { IEvent } from "@/events/application/ports/event/event";
-import { defaultDataValidation } from "@/events/application/validations/default-validation";
+import { DefaultOutputValidation, defaultDataValidation } from "@/events/application/validations/default-validation";
 import { UserInput } from "@/events/application/schemas/user-schema";
 import { SourceInput } from "@/events/application/schemas/source-schema";
 import { DeviceInput } from "@/events/application/schemas/device-id-schema";
@@ -11,9 +11,7 @@ import { SalesChannelInput } from "@/events/application/schemas/sales-channel-sc
 import { InfoInput } from "@/events/application/schemas/info-schema";
 import { IdentityInput } from "@/events/application/schemas/identity-schema";
 
-type HomeParams = {
-    [key: string]: any
-}
+type HomeParams = Partial<DefaultOutputValidation>
 
 export class Home extends EventService implements EventBuilder {
     public data: HomeParams = {};
