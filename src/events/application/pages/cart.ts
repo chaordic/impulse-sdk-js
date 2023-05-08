@@ -12,10 +12,8 @@ import { UrlInput } from "@/events/application/schemas/url-schema";
 import { UserInput } from "@/events/application/schemas/user-schema";
 import { CartId, CartItems } from "@/events/application/schemas/cart-transaction-schema";
 
-type CartParams = Partial<CartTransactionOutput>
-
 export class Cart extends EventService implements EventBuilder {
-    public data: CartParams = {};
+    public data: Partial<CartTransactionOutput> = {};
 
     constructor(eventParams: IEvent) {
         super('cart', cartTransactionValidation, eventParams);

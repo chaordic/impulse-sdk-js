@@ -11,10 +11,8 @@ import { SalesChannelInput } from "@/events/application/schemas/sales-channel-sc
 import { InfoInput } from "@/events/application/schemas/info-schema";
 import { IdentityInput } from "@/events/application/schemas/identity-schema";
 
-type HomeParams = Partial<DefaultOutputValidation>
-
 export class Home extends EventService implements EventBuilder {
-    public data: HomeParams = {};
+    public data: Partial<DefaultOutputValidation> = {};
     
     constructor(eventParams: IEvent) {
         super('home', defaultDataValidation, eventParams);
