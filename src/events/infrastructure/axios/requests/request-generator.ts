@@ -29,7 +29,7 @@ export class Request {
     readonly method: RequestMethod,
     readonly bodyContent?: any,
     readonly pathParams?: RequestParamValue,
-    readonly headerParams?: RequestParamValue,
+    readonly headerParams?: any,
     readonly queryParams?: RequestParamValue,
     readonly formParam?: RequestParamValue,
   ) {
@@ -64,20 +64,26 @@ export class Request {
   }
 }
 
-function setHeaders(headerParams: RequestParamValue): AxiosHeaders {
-  const headers = {
-    'Content-Type':'application/json'
+function setHeaders(headerParams: RequestParamValue): AxiosHeaders {  
+  const defaultHeader = {
+    'Content-Type': 'application/json'
   }
-
+  
   if (headerParams) {
-    for (const [key, value] of Object.entries(headerParams)) {
+    const newHeaders = Object.entries(headerParams).reduce((headers: any, entry) => {
+      const [key,value] = entry
+  
       if (value) {
-        Object.assign(headers, {key, value});
+        headers[key] = value
       }
-    }
+  
+      return headers
+    }, defaultHeader)
+
+    return new AxiosHeaders(newHeaders)   
   }
 
-  return new AxiosHeaders(headers)
+  return new AxiosHeaders(defaultHeader) 
 }
 
 function makeUrl(path: URL, queryParams: RequestParamValue): URL {  
