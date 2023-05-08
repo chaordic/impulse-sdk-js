@@ -65,19 +65,19 @@ export class Request {
 }
 
 function setHeaders(headerParams: RequestParamValue): AxiosHeaders {
-  const headers: AxiosHeaders = new AxiosHeaders()
-
-  headers.set('Content-Type', 'application/json');
+  const headers = {
+    'Content-Type':'application/json'
+  }
 
   if (headerParams) {
     for (const [key, value] of Object.entries(headerParams)) {
       if (value) {
-        headers.set(key, String(value));
+        Object.assign(headers, {key, value});
       }
     }
   }
 
-  return headers
+  return new AxiosHeaders(headers)
 }
 
 function makeUrl(path: URL, queryParams: RequestParamValue): URL {  
