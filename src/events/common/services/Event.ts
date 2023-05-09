@@ -15,11 +15,11 @@ import { SalesChannelInput } from "@/events/application/schemas/sales-channel.sc
 import { DeviceInput } from "@/events/application/schemas/device-id.schema";
 import { SourceInput } from "@/events/application/schemas/source.schema";
 import { UrlInput } from "@/events/application/schemas/url.schema";
-import { getRelativeUrl } from "../helpers/strings/buildUrl";
+import { getRelativeUrl } from "@/events/common/helpers/strings/buildUrl";
 import { DefaultOutputValidation } from "@/events/application/validations/default-validation";
 
 export abstract class Event<T extends DefaultOutputValidation = DefaultOutputValidation> implements EventBuilder {
-    protected data: Partial<T>;
+    protected data: Partial<T> = {};
     private readonly config: EventConfig;
     private readonly path: string;
     private readonly schema: ZodType;
@@ -28,7 +28,7 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
         this.path = path;
         this.schema = schema;
         this.config = config
-        this.data = {}
+        
         this.data.apiKey = config.apiKey
         this.data.deviceId = config.deviceId
         this.data.salesChannel = config.salesChannel

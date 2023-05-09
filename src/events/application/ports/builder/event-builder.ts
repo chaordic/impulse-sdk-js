@@ -14,5 +14,5 @@ export interface EventBuilder {
     info?(info: InfoInput): this;
     salesChannel?(salesChannel: SalesChannelInput): this;
     url(url: UrlInput): this;
-    send(): Promise<void>
+    send(): Promise<any | Error>
 }

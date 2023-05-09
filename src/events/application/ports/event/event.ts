@@ -1,7 +1,7 @@
 import { Cart } from "@/events/application/pages/cart";
 import { Home } from "@/events/application/pages/home";
-import { SourceInput } from "../../schemas/source.schema";
-import { UserInput } from "../../schemas/user.schema";
+import { SourceInput } from "@/events/application/schemas/source.schema";
+import { UserInput } from "@/events/application/schemas/user.schema";
 
 export interface EventHttpConfig {
     retryPolicy?: 'exponential',
