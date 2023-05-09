@@ -3,6 +3,7 @@ import { categorySubcategoryInputValidation } from "../../../src/events/applicat
 export const mockCategoryInput = {
     apiKey: "api-sample",
     source: "desktop",
+    deviceId: "fb4e49b6-35e3-42a1-a397-960f0b37ab6a",
     info: {
         pageViewId: "c648ac3b-478e-435f-92f7-809d01a2b0f9",
         chaordicCookie: "fb4e49b6-35e3-42a1-a397-960f0b37ab6a",
@@ -21,6 +22,7 @@ export const mockCategoryInput = {
 export const mockSubcategoryInput = {
     apiKey: "api-sample",
     source: "desktop",
+    deviceId: "fb4e49b6-35e3-42a1-a397-960f0b37ab6a",
     info: {
         pageViewId: "c648ac3b-478e-435f-92f7-809d01a2b0f9",
         chaordicCookie: "fb4e49b6-35e3-42a1-a397-960f0b37ab6a",

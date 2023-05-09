@@ -8,6 +8,7 @@ export const mockCartInput = {
         email: "teste@linx3.com",
         allowMailMarketing: true
     },
+    deviceId: "fb4e49b6-35e3-42a1-a397-960f0b37ab6a",
     info: {
         pageViewId: "c648ac3b-478e-435f-92f7-809d01a2b0f9",
         shopbackCookie: "fb4e49b6-35e3-42a1-a397-960f0b37ab6a",
