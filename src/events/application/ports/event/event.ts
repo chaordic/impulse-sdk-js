@@ -1,25 +1,49 @@
 import { Cart } from "@/events/application/pages/cart";
 import { Home } from "@/events/application/pages/home";
-export interface IEvent {
-    apiKey: string,
-    secretKey?: string,
-    retryPolicy: string,
-    sendAsBeacon: boolean,
-    source?: string,
-    deviceId?: string
+import { SourceInput } from "../../schemas/source.schema";
+import { UserInput } from "../../schemas/user.schema";
+
+export interface EventHttpConfig {
+    retryPolicy?: 'exponential',
+    sendAsBeacon?: boolean,
 }
 
-export class Event {
-    config: IEvent
+export interface EventBaseConfig {
+    /**
+     * Apikey é pra fazer as requests
+     */
+    apiKey: string,
+    deviceId: string
+    source: SourceInput,
+    salesChannel?: string
+    user?: UserInput
+    http?: EventHttpConfig
+}
 
-    constructor(config: IEvent){
-        this.config = config;
+export interface EventBackendConfig extends EventBaseConfig {
+    type: 'backend'
+    secretKey: string
+}
+
+export interface EventFrontendConfig extends EventBaseConfig {
+    type: 'frontend'
+    domain: string
+}
+
+export type EventConfig = EventBackendConfig | EventFrontendConfig
+
+export class EventClient {
+    private config: EventConfig
+
+    constructor(config: EventConfig) {
+        this.config = config
     }
 
-    public home(): Home {
+    home(): Home {
         return new Home(this.config)
     }
-    public cart(): Cart {
+
+    cart(): Cart {
         return new Cart(this.config)
     }
 }
