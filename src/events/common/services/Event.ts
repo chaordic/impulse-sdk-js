@@ -23,17 +23,20 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
     private readonly config: EventConfig;
     private readonly path: string;
     private readonly schema: ZodType;
+    
 
     constructor(path: string, schema: ZodType, config: EventConfig) {
         this.path = path;
         this.schema = schema;
         this.config = config
-        
-        this.data.apiKey = config.apiKey
-        this.data.deviceId = config.deviceId
-        this.data.salesChannel = config.salesChannel
-        this.data.source = config.source
-        this.data.user = config.user
+
+        this.data = {
+            apiKey: config.apiKey,
+            deviceId: config.deviceId,
+            salesChannel: config.salesChannel,
+            source: config.source,
+            user: config.user           
+        } as Partial<T>
     }
     
     user(user: UserInput): this {
@@ -57,21 +60,29 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
     }
 
     /**
-     * // TO DO: exemplo de doc
-     * Device Id serve pra tal coisa
-     * @param deviceId 
+     * Identificador único do dispositivo.
+     * Todas as requisições feitas a partir do mesmo dispositivo devem possuir o mesmo deviceId.
+     * @param {DeviceInput} deviceId - string deviceId.
      * @returns 
      */
     deviceId(deviceId: DeviceInput): this {
         this.data.deviceId = deviceId;
         return this
     }
-
+    /**
+     * Um identificador da origem dos dados. Exemplo: "desktop", "mobile" ou "app".
+     * @enum {SourceInput} source - string source.
+     * @returns 
+     */
     source(source: SourceInput): this {
         this.data.source = source;
         return this
     }
-
+    /**
+     * Um identificador da origem da URL. Exemplo: https://url.com.
+     * @param {UrlInput} url - string url.
+     * @returns 
+     */
     url(url: UrlInput | undefined = getRelativeUrl()): this {
         this.data.url = url;
         return this
