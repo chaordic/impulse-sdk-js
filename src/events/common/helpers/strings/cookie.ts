@@ -31,4 +31,3 @@ function parseCookieToObject(cookie: string): object {
 
     return parts.length < 2 ? {} : { [parts[0].trim()]: parts[1].trim() }
 }  
-  

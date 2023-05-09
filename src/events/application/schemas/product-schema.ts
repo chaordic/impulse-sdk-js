@@ -12,4 +12,3 @@ export const productSchema = z
         .optional()
         .transform(Number)
     });
-    

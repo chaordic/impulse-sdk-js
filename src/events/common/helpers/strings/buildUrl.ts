@@ -13,4 +13,3 @@ function buildUrl(url: string): string | undefined {
       return url
     }
 }
-  
