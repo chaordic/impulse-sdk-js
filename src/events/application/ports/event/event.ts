@@ -15,13 +15,28 @@ export interface EventHttpConfig {
 
 export interface EventBaseConfig {
     /**
-     * Apikey é pra fazer as requests
+     * identifier from your store
      */
     apiKey: ApiKeyInput,
+    /**
+     * identifier unique (UUIDv4) for the represented device
+     */
     deviceId: DeviceInput
+    /**
+     * identifier for the represented source "desktop", "mobile" or "app"
+     */
     source: SourceInput,
+    /**
+     * identifier only for stores using sales channel
+     */
     salesChannel?: SalesChannelInput
+    /**
+     * identifier logged user information
+     */
     user?: UserInput
+    /**
+     * identifier from specific http settings
+     */
     http?: EventHttpConfig
 }
 
@@ -37,17 +52,24 @@ export interface EventFrontendConfig extends EventBaseConfig {
 
 export type EventConfig = EventBackendConfig | EventFrontendConfig
 
+/**
+ * EventClient constructor
+*/
 export class EventClient {
     private config: EventConfig
 
     constructor(config: EventConfig) {
         this.config = config
     }
-
+    /**
+     * View Home constructor
+     */
     home(): Home {
         return new Home(this.config)
     }
-
+    /**
+     * View Cart constructor
+     */
     cart(): Cart {
         return new Cart(this.config)
     }

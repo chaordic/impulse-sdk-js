@@ -18,13 +18,20 @@ import { UrlInput } from "@/events/application/schemas/url.schema";
 import { getRelativeUrl } from "@/events/common/helpers/strings/buildUrl";
 import { DefaultOutputValidation } from "@/events/application/validations/default-validation";
 
+/**
+ * Class Event
+ */
 export abstract class Event<T extends DefaultOutputValidation = DefaultOutputValidation> implements EventBuilder {
     protected data: Partial<T> = {};
     private readonly config: EventConfig;
     private readonly path: string;
     private readonly schema: ZodType;
-    
-
+    /**
+     * Event constructor
+     * @param path {string}
+     * @param schema {ZodType}
+     * @param config {EventConfig}
+     */
     constructor(path: string, schema: ZodType, config: EventConfig) {
         this.path = path;
         this.schema = schema;
@@ -38,31 +45,45 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
             user: config.user           
         } as Partial<T>
     }
-    
+    /**
+     * identifier logged user information 
+     * @param user {UserInput}
+     * @returns 
+     */
     user(user: UserInput): this {
         this.data.user = user;
         return this
     }
-
+    /**
+     * identifier unique (UUIDv4) for the represented device
+     * @param identity {IdentityInput}
+     * @returns 
+     */
     identity(identity: IdentityInput): this {
         this.data.identity = identity;
         return this
     }
-
+    /**
+     * identifier legacy cookies
+     * @param info {InfoInput}
+     * @returns 
+     */
     info(info: InfoInput): this {
         this.data.info = info
         return this
     }
-
+    /**
+     * identifier only for stores using sales channel
+     * @param salesChannel {SalesChannelInput}
+     * @returns 
+     */
     salesChannel(salesChannel: SalesChannelInput): this {
         this.data.salesChannel = salesChannel;
         return this
     }
-
     /**
-     * Identificador único do dispositivo.
-     * Todas as requisições feitas a partir do mesmo dispositivo devem possuir o mesmo deviceId.
-     * @param {DeviceInput} deviceId - string deviceId.
+     * identifier unique (UUIDv4) for the represented device
+     * @param deviceId {DeviceInput}
      * @returns 
      */
     deviceId(deviceId: DeviceInput): this {
@@ -70,8 +91,8 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
         return this
     }
     /**
-     * Um identificador da origem dos dados. Exemplo: "desktop", "mobile" ou "app".
-     * @enum {SourceInput} source - string source.
+     * identifier for the represented source "desktop", "mobile" or "app"
+     * @param source {SourceInput}
      * @returns 
      */
     source(source: SourceInput): this {
@@ -79,8 +100,8 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
         return this
     }
     /**
-     * Um identificador da origem da URL. Exemplo: https://url.com.
-     * @param {UrlInput} url - string url.
+     * identifier can be used to get the current page address (URL)
+     * @param url {UrlInput} 
      * @returns 
      */
     url(url: UrlInput | undefined = getRelativeUrl()): this {

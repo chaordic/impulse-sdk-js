@@ -24,13 +24,13 @@ export const infoSchema = z
             .string({
                 invalid_type_error: "chaordicCookie must be a string"
             })
-            .uuid(),
+            .uuid()
+            .optional(),
         impulseSuiteCookie: z
             .string({
                 invalid_type_error: "impulseSuiteCookie must be a string"
             })
-            .uuid()
-            .optional(),
+            .uuid(),
         referrer: z
             .string({
                 invalid_type_error: "referrer must be a string"
