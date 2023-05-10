@@ -9,13 +9,19 @@ import { UrlInput } from "@/events/application/schemas/url.schema";
 import { SecretKeyInput } from "@/events/application/schemas/secret-key.schema";
 
 export interface EventHttpConfig {
+    /**
+     * Represents an abstraction for retrying event operations
+     */
     retryPolicy?: 'exponential',
+    /**
+     * sends an HTTP POST request containing a small amount of data to a web server
+     */
     sendAsBeacon?: boolean,
 }
 
 export interface EventBaseConfig {
     /**
-     * identifier from your store
+     * identifier apiKey from your store
      */
     apiKey: ApiKeyInput,
     /**
@@ -41,12 +47,24 @@ export interface EventBaseConfig {
 }
 
 export interface EventBackendConfig extends EventBaseConfig {
+    /**
+     * identifier type of integration backend
+     */
     type: 'backend'
+    /**
+     * identifier secretKey from your store 
+     */
     secretKey: SecretKeyInput
 }
 
 export interface EventFrontendConfig extends EventBaseConfig {
+    /**
+     * identifier type of integration frontend
+     */
     type: 'frontend'
+    /**
+     * identifier domain from your store
+     */
     domain: UrlInput
 }
 

@@ -34,8 +34,7 @@ export const infoSchema = z
         referrer: z
             .string({
                 invalid_type_error: "referrer must be a string"
-            })
-            .optional()          
+            })     
     }).optional()
 
 export type InfoInput = z.input<typeof infoSchema>;

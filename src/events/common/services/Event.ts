@@ -108,7 +108,10 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
         this.data.url = url;
         return this
     }
-
+    /**
+     * send the request events to the server. 
+     * @returns {any | Error}
+     */
     async send(): Promise<any | Error> {        
         try {
             const parser = new Parser(this.schema)
