@@ -1,5 +1,5 @@
 import { SearchInputValidation, searchValidation } from "../../../src/events/application/validations/search-validation"
-import { Parser } from "../../../src/events/common/helpers/objects/parser";
+import { ParserSchema } from "../../../src/events/common/helpers/objects/parser.schema";
 
 let mockSearchInput: SearchInputValidation = {
     apiKey: "api-sample",
@@ -30,7 +30,7 @@ let mockSearchInput: SearchInputValidation = {
 
 describe('events', () => {
     test('should validate data searchView', () => {
-        const data = new Parser(searchValidation).validate(mockSearchInput)
+        const data = new ParserSchema(searchValidation).validate(mockSearchInput)
         expect(mockSearchInput.searchId).toEqual(data.searchId);
     });
 })

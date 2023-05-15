@@ -1,5 +1,5 @@
 import { ProductInputValidation, ProductOutputValidation, productDataValidation } from "../../../src/events/application/validations/product-validation"
-import { Parser } from "../../../src/events/common/helpers/objects/parser";
+import { ParserSchema } from "../../../src/events/common/helpers/objects/parser.schema";
 
 let mockProductInput: ProductInputValidation | ProductOutputValidation = {
     apiKey: "api-sample",
@@ -22,7 +22,7 @@ let mockProductInput: ProductInputValidation | ProductOutputValidation = {
 
 describe('events', () => {
     test('should validate data productView', () => {
-        const data = new Parser(productDataValidation).validate(mockProductInput)
+        const data = new ParserSchema(productDataValidation).validate(mockProductInput)
         expect(Number(mockProductInput.price)).toEqual(data.price);
     });
 })

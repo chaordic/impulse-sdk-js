@@ -1,15 +1,15 @@
 import { categorySubcategoryDataValidation } from "../../../src/events/application/validations/category-subcategory-validation"
-import { Parser } from "../../../src/events/common/helpers/objects/parser";
+import { ParserSchema } from "../../../src/events/common/helpers/objects/parser.schema";
 import { mockCategoryInput as category } from "../mocks/categorySubcategory";
 
 describe('events', () => {
     test('should validate data categoryView', () => {
-        const data = new Parser(categorySubcategoryDataValidation).validate(category)
+        const data = new ParserSchema(categorySubcategoryDataValidation).validate(category)
         expect(category.categories).toEqual(data.categories);
     });
     test('should validate data categoryView array strings', () => {
         category.categories = [{ id: "123", name: "moveis"}]
-        const data = new Parser(categorySubcategoryDataValidation).validate(category)
+        const data = new ParserSchema(categorySubcategoryDataValidation).validate(category)
         expect(category.categories).toEqual(data.categories);
     });
 })

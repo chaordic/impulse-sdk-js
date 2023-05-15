@@ -1,5 +1,5 @@
 import { ZodType } from "zod";
-export class Parser {
+export class ParserSchema {
     name: ZodType;
 
     constructor(schemaValidation: ZodType) {

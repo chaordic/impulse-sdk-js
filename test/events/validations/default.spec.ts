@@ -1,10 +1,10 @@
 import { defaultDataValidation } from "../../../src/events/application/validations/default-validation"
-import { Parser } from "../../../src/events/common/helpers/objects/parser";
+import { ParserSchema } from "../../../src/events/common/helpers/objects/parser.schema";
 import { mockHomeInput } from "../mocks/home";
 
 describe('events', () => {
     test('should validate data otherView, notFoundView, checkoutView', () => {
-        const parser = new Parser(defaultDataValidation)
+        const parser = new ParserSchema(defaultDataValidation)
         expect(parser.validate(mockHomeInput)).toEqual(mockHomeInput);
     });
 })
