@@ -4,7 +4,7 @@ import { ZodError, ZodType } from "zod";
 import { Request } from "@/events/infrastructure/axios/requests/request-generator";
 import { BASE_URL } from "@/events/common/helpers/strings/constants";
 import { LinxImpulseError } from "@/events/application/errors/linx-impulse-error";
-import { Parser } from "@/events/common/helpers/objects/parser";
+import { ParserSchema } from "@/events/common/helpers/objects/parser.schema";
 import { ValidationError } from "@/events/application/errors/validation-error";
 import { EventConfig } from "@/events/application/ports/event/event";
 import { EventBuilder } from "@/events/application/ports/builder/event-builder";
@@ -112,7 +112,7 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
      */
     async send(): Promise<any | Error> {        
         try {
-            const parser = new Parser(this.schema)
+            const parser = new ParserSchema(this.schema)
             
             const options = await new Request(
                 new URL(`${BASE_URL.href}/${this.path}`),
