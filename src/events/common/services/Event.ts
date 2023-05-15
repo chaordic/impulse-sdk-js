@@ -15,8 +15,12 @@ import { SalesChannelInput } from "@/events/application/schemas/sales-channel.sc
 import { DeviceInput } from "@/events/application/schemas/device-id.schema";
 import { SourceInput } from "@/events/application/schemas/source.schema";
 import { UrlInput } from "@/events/application/schemas/url.schema";
-import { getRelativeUrl } from "@/events/common/helpers/strings/buildUrl";
+import { getReferrer, getRelativeUrl } from "@/events/common/helpers/strings/url";
 import { DefaultOutputValidation } from "@/events/application/validations/default-validation";
+import { setCookie } from "@/events/common/helpers/strings/cookie";
+import { getUuid as UUID } from "@/events/common/helpers/strings/uuid";
+import { getDeviceType } from "@/events/common/helpers/strings/deviceType";
+import { getSystemInfo } from "@/events/common/helpers/strings/systemInfo";
 
 /**
  * Class Event
@@ -37,13 +41,7 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
         this.schema = schema;
         this.config = config
 
-        this.data = {
-            apiKey: config.apiKey,
-            deviceId: config.deviceId,
-            salesChannel: config.salesChannel,
-            source: config.source,
-            user: config.user           
-        } as Partial<T>
+        this.data = this.setDefaultBySource()
     }
     /**
      * identifier logged user information 
@@ -145,5 +143,42 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
             console.error(`Request failed with Exception : ${JSON.stringify(lastKnownError)}\n`)
             throw new LinxImpulseError(err.response.data.message);
         }
+    }
+
+
+    setDefaultBySource(): Partial<T> {
+        if (this.config.type === 'frontend') {
+            return this.setDefaultFrontend()
+        }
+
+        return this.setDefaultBackend()
+
+    }
+    
+    protected setDefaultBackend(): Partial<T> {
+        return {
+            apiKey: this.config.apiKey,
+            deviceId: this.config.deviceId,
+            salesChannel: this.config.salesChannel,
+            source: this.config.source,
+            user: this.config.user
+        } as Partial<T>
+    }
+
+    protected setDefaultFrontend(): Partial<T> {
+        return {
+            apiKey: this.config.apiKey,
+            salesChannel: this.config.salesChannel,
+            source: getDeviceType(getSystemInfo()),
+            user: this.config.user,
+            info: {
+                impulseSuiteCookie: setCookie('chaordic_browserId', UUID()),
+                referrer: getReferrer()
+            },
+            identity: {
+                session: setCookie('impulsesuite_session', `${new Date().getTime()}-${Math.random()}`),
+                browserId: setCookie('chaordic_browserId', 'onsiteBrowserId')
+            }
+        } as Partial<T>
     }
 }

@@ -1,4 +1,4 @@
-export function buildDeviceType(userAgent: string): string {
+export function getDeviceType(userAgent: string): string {
   const defaultDevice = 'desktop';
   const deviceTypes = {
     mobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i,
