@@ -15,7 +15,7 @@ export class Cart extends Event<CartTransactionOutput> {
     /**
      * Unique cart identifier
      * @param id {string}
-     * @returns 
+     * @returns
      */
     id(id: CartId): this {
         this.data.id = id;

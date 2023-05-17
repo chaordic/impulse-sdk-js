@@ -1,4 +1,4 @@
-import { isBrowser } from "@/events/common/helpers/strings/isBrowser";
+import { isBrowser } from "@/events/common/helpers/strings/browser";
 
 export function getSystemInfo(): string {
     if (isBrowser()) {

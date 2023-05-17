@@ -18,9 +18,9 @@ import { UrlInput } from "@/events/application/schemas/url.schema";
 import { getReferrer, getRelativeUrl } from "@/events/common/helpers/strings/url";
 import { DefaultOutputValidation } from "@/events/application/validations/default-validation";
 import { setCookie } from "@/events/common/helpers/strings/cookie";
-import { getUuid as UUID } from "@/events/common/helpers/strings/uuid";
 import { getDeviceType } from "@/events/common/helpers/strings/deviceType";
 import { getSystemInfo } from "@/events/common/helpers/strings/systemInfo";
+import { getBrowserId } from "@/events/common/helpers/strings/browser";
 
 /**
  * Class Event
@@ -146,7 +146,7 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
     }
 
 
-    setDefaultBySource(): Partial<T> {
+    private setDefaultBySource(): Partial<T> {
         if (this.config.type === 'frontend') {
             return this.setDefaultFrontend()
         }
@@ -155,7 +155,7 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
 
     }
     
-    protected setDefaultBackend(): Partial<T> {
+    private setDefaultBackend(): Partial<T> {
         return {
             apiKey: this.config.apiKey,
             deviceId: this.config.deviceId,
@@ -165,19 +165,21 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
         } as Partial<T>
     }
 
-    protected setDefaultFrontend(): Partial<T> {
+    private setDefaultFrontend(): Partial<T> {
+        const cookie = setCookie('chaordic_browserId', getBrowserId())
         return {
             apiKey: this.config.apiKey,
             salesChannel: this.config.salesChannel,
             source: getDeviceType(getSystemInfo()),
             user: this.config.user,
             info: {
-                impulseSuiteCookie: setCookie('chaordic_browserId', UUID()),
+                impulseSuiteCookie: cookie,
                 referrer: getReferrer()
             },
             identity: {
                 session: setCookie('impulsesuite_session', `${new Date().getTime()}-${Math.random()}`),
-                browserId: setCookie('chaordic_browserId', 'onsiteBrowserId')
+                anonymousUserId: setCookie('chaordic_anonymousUserId', `anon-${cookie}`),
+                browserId: cookie
             }
         } as Partial<T>
     }
