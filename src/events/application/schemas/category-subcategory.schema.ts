@@ -34,3 +34,6 @@ export const categorySubcategorySchema = z.union([
         }
     )
 ])
+
+export type CategoryInput = z.input<typeof categorySubcategorySchema>;
+export type SubcategoryInput = z.input<typeof categorySubcategorySchema>;

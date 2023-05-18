@@ -15,3 +15,5 @@ export const tagSchema = z
         }
     )
     .optional()
+
+export type TagInput = z.input<typeof tagSchema>;

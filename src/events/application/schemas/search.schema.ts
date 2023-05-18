@@ -27,3 +27,7 @@ export const searchSchema = z
             }
         )
     });
+
+export type SearchQuery = z.input<typeof searchSchema.shape.query>;
+export type SearchId = z.input<typeof searchSchema.shape.searchId>; 
+export type SearchItems = z.input<typeof searchSchema.shape.items>; 

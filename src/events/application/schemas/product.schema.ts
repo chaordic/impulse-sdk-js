@@ -12,3 +12,6 @@ export const productSchema = z
         .optional()
         .transform(Number)
     });
+
+export type ProductId = z.input<typeof productSchema.shape.pid>;
+export type ProductPrice = z.input<typeof productSchema.shape.price>;
