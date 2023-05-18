@@ -1,4 +1,4 @@
-import { cartTransactionValidation } from "../../../src/events/application/validations/cart-transaction-validation"
+import { cartTransactionValidation } from "../../../src/events/application/validations/cart-transaction.validation"
 import { ParserSchema } from "../../../src/events/common/helpers/objects/parser.schema";
 import { mockCartInput as mockTransactionInput } from "../mocks/cart";
 

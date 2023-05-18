@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { searchSchema } from "@/events/application/schemas/search.schema";
-import { defaultDataValidation } from "@/events/application/validations/default-validation";
+import { defaultDataValidation } from "@/events/application/validations/default.validation";
 
 export const searchValidation = z.intersection(defaultDataValidation, searchSchema)
 

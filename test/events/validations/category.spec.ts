@@ -1,4 +1,4 @@
-import { categorySubcategoryDataValidation } from "../../../src/events/application/validations/category-subcategory-validation"
+import { categorySubcategoryDataValidation } from "../../../src/events/application/validations/category-subcategory.validation"
 import { ParserSchema } from "../../../src/events/common/helpers/objects/parser.schema";
 import { mockCategoryInput as category } from "../mocks/categorySubcategory";
 

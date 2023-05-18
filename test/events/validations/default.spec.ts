@@ -1,4 +1,4 @@
-import { defaultDataValidation } from "../../../src/events/application/validations/default-validation"
+import { defaultDataValidation } from "../../../src/events/application/validations/default.validation"
 import { ParserSchema } from "../../../src/events/common/helpers/objects/parser.schema";
 import { mockHomeInput } from "../mocks/home";
 

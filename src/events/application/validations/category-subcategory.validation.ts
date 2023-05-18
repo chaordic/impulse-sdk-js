@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { categorySubcategorySchema } from "@/events/application/schemas/category-subcategory.schema";
 import { tagSchema } from "@/events/application/schemas/tag.schema";
-import { defaultDataValidation } from "@/events/application/validations/default-validation";
+import { defaultDataValidation } from "@/events/application/validations/default.validation";
 
 export const categorySubcategoryDataValidation = defaultDataValidation
     .extend({

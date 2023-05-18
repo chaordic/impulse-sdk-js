@@ -1,4 +1,4 @@
-import { SearchInputValidation, searchValidation } from "../../../src/events/application/validations/search-validation"
+import { SearchInputValidation, searchValidation } from "../../../src/events/application/validations/search.validation"
 import { ParserSchema } from "../../../src/events/common/helpers/objects/parser.schema";
 
 let mockSearchInput: SearchInputValidation = {

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { productSchema } from "@/events/application/schemas/product.schema";
-import { defaultDataValidation } from "@/events/application/validations/default-validation";
+import { defaultDataValidation } from "@/events/application/validations/default.validation";
 
 export const productDataValidation = z.intersection(defaultDataValidation, productSchema)
 

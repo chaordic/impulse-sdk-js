@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { cartTransactionSchema } from "@/events/application/schemas/cart-transaction.schema";
-import { defaultDataValidation } from "@/events/application/validations/default-validation";
+import { defaultDataValidation } from "@/events/application/validations/default.validation";
 
 export const cartTransactionValidation1 = defaultDataValidation
     .extend({

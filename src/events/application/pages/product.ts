@@ -1,6 +1,6 @@
 import { EventConfig } from "@/events/application/ports/event/event";
 import { Event } from "@/events/common/services/Event"
-import { ProductOutputValidation, productDataValidation } from "@/events/application/validations/product-validation";
+import { ProductOutputValidation, productDataValidation } from "@/events/application/validations/product.validation";
 import { ProductId, ProductPrice } from "@/events/application/schemas/product.schema";
 
 /**

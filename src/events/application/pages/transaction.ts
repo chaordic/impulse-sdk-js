@@ -1,6 +1,6 @@
 import { EventConfig } from "@/events/application/ports/event/event";
 import { Event } from "@/events/common/services/Event"
-import { TransactionOutputValidation, cartTransactionValidation } from "@/events/application/validations/cart-transaction-validation";
+import { TransactionOutputValidation, cartTransactionValidation } from "@/events/application/validations/cart-transaction.validation";
 import { TransactionId, TransactionItems } from "@/events/application/schemas/cart-transaction.schema";
 
 /**

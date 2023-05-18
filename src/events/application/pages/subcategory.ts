@@ -1,6 +1,6 @@
 import { EventConfig } from "@/events/application/ports/event/event";
 import { Event } from "@/events/common/services/Event"
-import { SubcategoryOutputValidation, categorySubcategoryDataValidation } from "@/events/application/validations/category-subcategory-validation";
+import { SubcategoryOutputValidation, categorySubcategoryDataValidation } from "@/events/application/validations/category-subcategory.validation";
 import { SubcategoryInput } from "@/events/application/schemas/category-subcategory.schema";
 import { TagInput } from "@/events/application/schemas/tag.schema";
 

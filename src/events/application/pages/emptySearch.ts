@@ -1,6 +1,6 @@
 import { EventConfig } from "@/events/application/ports/event/event";
 import { Event } from "@/events/common/services/Event"
-import { EmptySearchInputValidation, searchValidation } from "@/events/application/validations/search-validation";
+import { EmptySearchInputValidation, searchValidation } from "@/events/application/validations/search.validation";
 import { SearchId, SearchQuery } from "@/events/application/schemas/search.schema";
 
 /**

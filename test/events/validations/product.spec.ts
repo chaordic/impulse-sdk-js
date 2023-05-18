@@ -1,4 +1,4 @@
-import { ProductInputValidation, ProductOutputValidation, productDataValidation } from "../../../src/events/application/validations/product-validation"
+import { ProductInputValidation, ProductOutputValidation, productDataValidation } from "../../../src/events/application/validations/product.validation"
 import { ParserSchema } from "../../../src/events/common/helpers/objects/parser.schema";
 
 let mockProductInput: ProductInputValidation | ProductOutputValidation = {
