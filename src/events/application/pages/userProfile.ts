@@ -3,10 +3,10 @@ import { EventConfig } from "@/events/application/ports/event/event";
 import { defaultDataValidation } from "@/events/application/validations/default.validation";
 
 /**
- * Userprofile
+ * UserProfile
  * data that needs to be declared on your store's panel logged user page view
  */
-export class Userprofile extends Event {
+export class UserProfile extends Event {
 
     constructor(config: EventConfig) {
         super('userprofile', defaultDataValidation, config);

@@ -1,13 +1,13 @@
 //example ES6 Event homeView
-import { Event } from "@chaordic/impulse-sdk-js"
+import { EventClient } from "@chaordic/impulse-sdk-js"
 
-const event = new Event({
-    apiKey: 'my-apikey',
-    secretKey: 'my-secret-key',
-    retryPolicy: 'exponential',
-    sendAsBeacon: true,
-    source: 'app',
-    deviceId: 'fb4e49b6-35e3-42a1-a397-960f0b37ab6a'
+const event = new EventClient({
+    type: 'frontend',
+    apiKey: 'my-apiKey',
+    http: {
+        retryPolicy: 'exponential',
+        sendAsBeacon: true
+    }
 })
 
 const home = event.home()

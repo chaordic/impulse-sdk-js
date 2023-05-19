@@ -16,7 +16,7 @@ import { DeviceInput } from "@/events/application/schemas/device-id.schema";
 import { SourceInput } from "@/events/application/schemas/source.schema";
 import { UrlInput } from "@/events/application/schemas/url.schema";
 import { getReferrer, getRelativeUrl } from "@/events/common/helpers/strings/url";
-import { DefaultOutputValidation } from "@/events/application/validations/default-validation";
+import { DefaultOutputValidation } from "@/events/application/validations/default.validation";
 import { setCookie } from "@/events/common/helpers/strings/cookie";
 import { getDeviceType } from "@/events/common/helpers/strings/deviceType";
 import { getSystemInfo } from "@/events/common/helpers/strings/systemInfo";
@@ -110,14 +110,14 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
      * send the request events to the server. 
      * @returns {any | Error}
      */
-    async send(): Promise<any | Error> {        
+    async send(eventData?: Partial<T>): Promise<any | Error> {      
         try {
             const parser = new ParserSchema(this.schema)
             
             const options = await new Request(
                 new URL(`${BASE_URL.href}/${this.path}`),
                 'POST',
-                parser.validate(this.data)
+                parser.validate(this.data || eventData)
             )
             .build();
             

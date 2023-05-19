@@ -7,6 +7,18 @@ import { DeviceInput } from "@/events/application/schemas/device-id.schema";
 import { SalesChannelInput } from "@/events/application/schemas/sales-channel.schema";
 import { UrlInput } from "@/events/application/schemas/url.schema";
 import { SecretKeyInput } from "@/events/application/schemas/secret-key.schema";
+import { Checkout } from "@/events/application/pages/checkout";
+import { Category } from "@/events/application/pages/category";
+import { EmptySearch } from "@/events/application/pages/emptySearch";
+import { Hotsite } from "@/events/application/pages/hotsite";
+import { LandingPage } from "@/events/application/pages/landingPage";
+import { NotFound } from "@/events/application/pages/notFound";
+import { Other } from "@/events/application/pages/other";
+import { Product } from "@/events/application/pages/product";
+import { Search } from "@/events/application/pages/search";
+import { Subcategory } from "@/events/application/pages/subcategory";
+import { Transaction } from "@/events/application/pages/transaction";
+import { UserProfile } from "@/events/application/pages/userProfile";
 
 export interface EventHttpConfig {
     /**
@@ -16,7 +28,7 @@ export interface EventHttpConfig {
     /**
      * sends an HTTP POST request containing a small amount of data to a web server
      */
-    sendAsBeacon?: boolean,
+    sendAsBeacon?: boolean
 }
 
 export interface EventBaseConfig {
@@ -80,15 +92,87 @@ export class EventClient {
         this.config = config
     }
     /**
-     * View Home constructor
+     * View cart constructor
+     */
+    cart(): Cart {
+        return new Cart(this.config)
+    }
+    /**
+     * View category constructor
+     */
+    category(): Category {
+        return new Category(this.config)
+    }
+    /**
+     * View checkout constructor
+     */
+    checkout(): Checkout {
+        return new Checkout(this.config)
+    }
+    /**
+     * View emptySearch constructor
+     */
+    emptySearch(): EmptySearch {
+        return new EmptySearch(this.config)
+    }
+    /**
+     * View home constructor
      */
     home(): Home {
         return new Home(this.config)
     }
     /**
-     * View Cart constructor
+     * View hotsite constructor
      */
-    cart(): Cart {
-        return new Cart(this.config)
+    hotsite(): Hotsite {
+        return new Hotsite(this.config)
+    }
+    /**
+     * View landingPage constructor
+     */
+    landingPage(): LandingPage {
+        return new LandingPage(this.config)
+    }
+    /**
+     * View notFound constructor
+     */
+    notFound(): NotFound {
+        return new NotFound(this.config)
+    }
+    /**
+     * View other constructor
+     */
+    other(): Other {
+        return new Other(this.config)
+    }
+    /**
+     * View product constructor
+     */
+    product(): Product {
+        return new Product(this.config)
+    }
+    /**
+     * View search constructor
+     */
+    search(): Search {
+        return new Search(this.config)
+    }
+    /**
+     * View subcategory constructor
+     */
+    subcategory(): Subcategory {
+        return new Subcategory(this.config)
+    }
+    /**
+     * View transaction constructor
+     */
+    transaction(): Transaction {
+        return new Transaction(this.config)
+    }
+    /**
+     * View userProfile constructor
+     */
+    userProfile(): UserProfile {
+        return new UserProfile(this.config)
     }
 }

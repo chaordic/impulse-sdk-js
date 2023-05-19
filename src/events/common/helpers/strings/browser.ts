@@ -3,7 +3,7 @@ export function isBrowser(): boolean {
   return typeof window !== 'undefined' &&  window.document &&  window.document.nodeType === DOCUMENT_NODE
 }
 
-export function setBrowserId(): string {
+export function getBrowserId(): string {
     const BROWSER_ID_VERSION = '0-';
     const DIGITS = '-_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const ARRAY_SIZE = 36
