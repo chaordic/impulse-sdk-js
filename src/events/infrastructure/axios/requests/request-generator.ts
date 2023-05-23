@@ -1,13 +1,13 @@
 import { AxiosRequestConfig, AxiosHeaders } from "axios";
 
 export type RequestParamValue = string
-    | Date
-    | string[]
-    | number
-    | number[]
-    | boolean
-    | boolean[]
-    | undefined
+  | Date
+  | string[]
+  | number
+  | number[]
+  | boolean
+  | boolean[]
+  | undefined
 
 export type RequestParams = Record<string, RequestParamValue>
 
@@ -66,7 +66,10 @@ export class Request {
 
 function setHeaders(headerParams: RequestParamValue): AxiosHeaders {  
   const defaultHeader = {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'x-integration-platform': 'sdk',
+    'x-integration-type': 'js',
+    'x-integration-version': `${process.env.npm_package_version}`,
   }
   
   if (headerParams) {

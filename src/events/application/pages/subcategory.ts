@@ -21,7 +21,7 @@ export class Subcategory extends Event<SubcategoryOutputValidation> {
     categories(categories: SubcategoryInput): this {
         this.data.categories = categories;
         return this
-    }    
+    }
     /**
      * Identifier set of page-related tags
      * @param tag {TagInput}
