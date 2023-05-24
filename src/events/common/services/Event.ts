@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { ZodError, ZodType } from "zod";
 
 import { Request } from "@/events/infrastructure/axios/requests/request-generator";
-import { BASE_URL } from "@/events/common/helpers/strings/constants";
+import { BASE_URL, COOKIE_ANON_USER_ID, COOKIE_BROWSER_ID, COOKIE_SESSION } from "@/events/common/helpers/strings/constants";
 import { LinxImpulseError } from "@/events/application/errors/linx-impulse-error";
 import { ParserSchema } from "@/events/common/helpers/objects/parser.schema";
 import { ValidationError } from "@/events/application/errors/validation-error";
@@ -21,6 +21,16 @@ import { setCookie } from "@/events/common/helpers/strings/cookie";
 import { getDeviceType } from "@/events/common/helpers/strings/deviceType";
 import { getSystemInfo } from "@/events/common/helpers/strings/systemInfo";
 import { getBrowserId } from "@/events/common/helpers/strings/browser";
+
+type GenericRecord = Record<string, any>
+
+type RequiredOnly<T extends GenericRecord> = {
+  [K in keyof T as undefined extends T[K] ? never : K]: T[K]
+}
+
+type OptionalsOnly<T extends GenericRecord> = {
+  [K in keyof T as undefined extends T[K] ? K : never]: T[K]
+}
 
 /**
  * Class Event
@@ -41,7 +51,17 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
         this.schema = schema;
         this.config = config
 
-        this.data = this.setDefaultBySource()
+        this.data = {
+            apiKey: this.config.apiKey,
+            ...this.setDefaultBySource(),
+        }
+
+        if (this.config.user) {
+            this.data.user = this.config.user
+        }
+        if (this.config.salesChannel) {
+            this.data.salesChannel = this.config.salesChannel
+        }
     }
     /**
      * identifier logged user information 
@@ -106,18 +126,19 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
         this.data.url = url;
         return this
     }
+    
     /**
      * send the request events to the server. 
      * @returns {any | Error}
      */
-    async send(eventData?: Partial<T>): Promise<any | Error> {      
+    async send(eventData?: RequiredOnly<T> | OptionalsOnly<T>): Promise<any | Error> { 
         try {
             const parser = new ParserSchema(this.schema)
             
             const options = await new Request(
                 new URL(`${BASE_URL.href}/${this.path}`),
                 'POST',
-                parser.validate(this.data || eventData)
+                parser.validate({...this.data, ...eventData})
             )
             .build();
             
@@ -157,28 +178,22 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
     
     private setDefaultBackend(): Partial<T> {
         return {
-            apiKey: this.config.apiKey,
             deviceId: this.config.deviceId,
-            salesChannel: this.config.salesChannel,
-            source: this.config.source,
-            user: this.config.user
+            source: this.config.source
         } as Partial<T>
     }
 
     private setDefaultFrontend(): Partial<T> {
-        const cookie = setCookie('chaordic_browserId', getBrowserId())
+        const cookie = setCookie(COOKIE_BROWSER_ID, getBrowserId())
         return {
-            apiKey: this.config.apiKey,
-            salesChannel: this.config.salesChannel,
             source: getDeviceType(getSystemInfo()),
-            user: this.config.user,
             info: {
                 impulseSuiteCookie: cookie,
                 referrer: getReferrer()
             },
             identity: {
-                session: setCookie('impulsesuite_session', `${new Date().getTime()}-${Math.random()}`),
-                anonymousUserId: setCookie('chaordic_anonymousUserId', `anon-${cookie}`),
+                session: setCookie(COOKIE_SESSION, `${new Date().getTime()}-${Math.random()}`),
+                anonymousUserId: setCookie(COOKIE_ANON_USER_ID, `anon-${cookie}`),
                 browserId: cookie
             }
         } as Partial<T>
