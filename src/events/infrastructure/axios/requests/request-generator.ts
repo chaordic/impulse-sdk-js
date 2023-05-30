@@ -43,7 +43,7 @@ export class Request {
   }
 
   async build(): Promise<AxiosRequestConfig> {
-    const headers: AxiosHeaders = setHeaders(this.headerParams);
+    const headers: AxiosHeaders = setHeaders(this.headerParams, this.bodyContent.domain);
     const url: URL = makeUrl(this.baseEndpoint, this.queryParams);
     let body: any = this.bodyContent;
 
@@ -64,12 +64,17 @@ export class Request {
   }
 }
 
-function setHeaders(headerParams: RequestParamValue): AxiosHeaders {  
-  const defaultHeader = {
+function setHeaders(headerParams: RequestParamValue, domain?: string): AxiosHeaders {  
+  let defaultHeader = {
     'Content-Type': 'application/json',
+    'User-Agent': `sdk-js-${process.env.npm_package_version}`, //frontend allows to change?
     'x-integration-platform': 'sdk',
     'x-integration-type': 'js',
     'x-integration-version': `${process.env.npm_package_version}`,
+  }
+
+  if (domain) {
+    Object.assign(defaultHeader, { 'x-host': `${domain}` });
   }
   
   if (headerParams) {

@@ -77,7 +77,7 @@ export interface EventFrontendConfig extends EventBaseConfig {
     /**
      * identifier domain from your store
      */
-    domain: UrlInput
+    domain?: UrlInput
 }
 
 export type EventConfig = EventBackendConfig | EventFrontendConfig

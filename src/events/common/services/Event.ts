@@ -36,7 +36,7 @@ type OptionalsOnly<T extends GenericRecord> = {
  * Class Event
  */
 export abstract class Event<T extends DefaultOutputValidation = DefaultOutputValidation> implements EventBuilder {
-    protected data: Partial<T> = {};
+    protected data: any = {};
     private readonly config: EventConfig;
     private readonly path: string;
     private readonly schema: ZodType;
@@ -167,7 +167,7 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
     }
 
 
-    private setDefaultBySource(): Partial<T> {
+    private setDefaultBySource(): object {
         if (this.config.type === 'frontend') {
             return this.setDefaultFrontend()
         }
@@ -176,16 +176,18 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
 
     }
     
-    private setDefaultBackend(): Partial<T> {
+    private setDefaultBackend(): object {
         return {
+            secretKey: ("secretKey" in this.config) ? this.config.secretKey : undefined,
             deviceId: this.config.deviceId,
             source: this.config.source
-        } as Partial<T>
+        }
     }
 
-    private setDefaultFrontend(): Partial<T> {
+    private setDefaultFrontend(): object {
         const cookie = setCookie(COOKIE_BROWSER_ID, getBrowserId())
         return {
+            domain: ("domain" in this.config) ? this.config.domain : getRelativeUrl(),
             source: getDeviceType(getSystemInfo()),
             info: {
                 impulseSuiteCookie: cookie,
@@ -196,6 +198,6 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
                 anonymousUserId: setCookie(COOKIE_ANON_USER_ID, `anon-${cookie}`),
                 browserId: cookie
             }
-        } as Partial<T>
+        }
     }
 }
