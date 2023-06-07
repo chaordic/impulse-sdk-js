@@ -1,0 +1,10 @@
+node_modules
+/.history
+.env
+dist
+dist-esm
+dist-cjs
+dist-types
+.npmrc
+coverage
+/.scannerwork

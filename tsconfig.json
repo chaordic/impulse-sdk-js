@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "baseUrl": "src",
+    "outDir": "dist-cjs",
+    "downlevelIteration": true,
+    "paths": {
+      "@/*": ["*"],
+    },
+    "rootDir": "src",
+    "importHelpers": true,
+    "incremental": true,
+    "useUnknownInCatchVariables": false,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "exclude": [
+    "node_modules",
+    "test",
+    "jest.config.js",
+    "webpack.config.js",
+    "coverage",
+    "examples",
+    "dist/**/*",
+    "dist-esm/**/*",
+    "dist-cjs/**/*",
+    "dist-types/**/*"
+  ]
+}
