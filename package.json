@@ -1,6 +1,6 @@
 {
   "name": "@chaordic/impulse-sdk-js",
-  "version": "1.0.8",
+  "version": null,
   "description": "",
   "main": "./dist-cjs/index.js",
   "module": "./dist-esm/bundle.js",
