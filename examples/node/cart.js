@@ -1,5 +1,5 @@
 //Example node Event Cart
-import { EventClient } from "@chaordic/impulse-sdk-js"
+import { EventClient } from "@linx_impulse/impulse-sdk-js"
 
 const event = new EventClient({
     type: 'backend',

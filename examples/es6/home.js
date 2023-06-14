@@ -1,17 +1,17 @@
 //example ES6 Event homeView
-import { EventClient } from "@chaordic/impulse-sdk-js"
+import { EventClient } from "@linx_impulse/impulse-sdk-js"
 
 const event = new EventClient({
-    type: 'frontend',
+    type: 'backend',
+    secretKey: 'test',
     apiKey: 'my-apiKey',
-    http: {
-        retryPolicy: 'exponential',
-        sendAsBeacon: true
-    }
+    deviceId: 'fb4e49b6-35e3-42a1-a397-960f0b37ab6a',
+    source: 'app',
+    salesChannel: "12"
 })
 
-const home = event.home()
-    .user({'id': '123', email: 'test@linx.net'})
-    .url('https://teste.com')
+event.home()
+    .url('https://test.com.br')
+    .deviceId('fb4e49b6-35e3-42a1-a397-960f0b37ab6a')
     .send()
     .then((res) => console.log(res.status))
