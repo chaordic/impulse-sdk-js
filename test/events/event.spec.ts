@@ -1,51 +1,37 @@
-import { Event } from "../../src/index";
+import { EventClient } from "../../src/index";
 import { mockCookie } from "./mocks/cookie";
 import { parseBrowserCookies, getCookie, setCookie } from "../../src/events/common/helpers/strings/cookie";
 
-const HttpStatusCodeNoContent = 204
+const HTTP_STATUS_CODE_NO_CONTENT = 204
 
 describe('events', () => {
-    test('should create default data build event Home', () => {
-        const event = new Event({
-            apiKey: 'api-sample',
-            secretKey: 'my-secret-key',
-            retryPolicy: 'exponential',
-            sendAsBeacon: true
+    test('should create default data build event Home', async () => {
+        const event = new EventClient({
+            apiKey: "my-apiKey",
+            secretKey: "lSJfQ==",
+            source: "mobile",
+            type: "backend"
         })
-        
-        const home = event.home().source('mobile').url('https://teste.com')
-        expect("mobile").toEqual(home.data.source);
-        expect("https://teste.com").toEqual(home.data.url);
-    });
-    test('should dispatch event send request homeView', async () => {
-        const event = new Event({
-            apiKey: 'api-sample',
-            secretKey: 'my-secret-key',
-            retryPolicy: 'exponential',
-            sendAsBeacon: true,
-            source: 'app'
-        })
-
-        const response = await event.home()
-            .user({'id': '123', email: 'teste@linx.com.br'})
+       
+        const res = await event.home()
+            .url('https://test.com.br')
             .deviceId('fb4e49b6-35e3-42a1-a397-960f0b37ab6a')
-            .source('mobile')
-            .url('https://teste.com')
             .send()
 
-        expect(HttpStatusCodeNoContent).toBe(response.status)
-    })
-    test('should dispatch event send request cartView', async () => {
-        const event = new Event({
-            apiKey: 'api-sample',
-            secretKey: 'my-secret-key',
-            retryPolicy: 'exponential',
-            sendAsBeacon: true,
-            deviceId: 'fb4e49b6-35e3-42a1-a397-960f0b37ab6a'
+        expect(res.status).toEqual(HTTP_STATUS_CODE_NO_CONTENT);
+    });
+    test('should dispatch event build request cartView', async () => {
+        const event = new EventClient({
+            apiKey: "my-apiKey",
+            secretKey: "lSJfQ==",
+            source: "mobile",
+            type: "backend"
         })
-        const response = await event.cart()
-            .user({'id': '123', email: 'teste@linx.com.br'})
+
+        const res = await event.cart()
+            .user({'id': '123', email: 'test@linx.com.br'})
             .source('mobile')
+            .deviceId('fb4e49b6-35e3-42a1-a397-960f0b37ab6a')
             .id('123456')
             .items([
                 {
@@ -54,10 +40,10 @@ describe('events', () => {
                     quantity: 2
                 }
             ])
-            .url('https://teste.com')
+            .url('https://test.com.br')
             .send()
 
-        expect(HttpStatusCodeNoContent).toBe(response.status)
+        expect(res.status).toBe(HTTP_STATUS_CODE_NO_CONTENT)
     })
     test('should identity name cookies browser', () => {
         const parseCookie = parseBrowserCookies(mockCookie)

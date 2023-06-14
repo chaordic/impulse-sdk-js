@@ -1,4 +1,4 @@
-//Example node Event homeview
+//Example node Event Cart
 import { EventClient } from "@chaordic/impulse-sdk-js"
 
 const event = new EventClient({
