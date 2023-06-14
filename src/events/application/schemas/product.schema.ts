@@ -10,7 +10,6 @@ export const productSchema = z
             invalid_type_error: "price must be a string"
         })
         .optional()
-        .transform(Number)
     });
 
 export type ProductId = z.input<typeof productSchema.shape.pid>;

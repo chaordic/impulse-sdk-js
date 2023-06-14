@@ -39,7 +39,7 @@ export interface EventBaseConfig {
     /**
      * identifier unique (UUIDv4) for the represented device
      */
-    deviceId: DeviceInput
+    deviceId?: DeviceInput
     /**
      * identifier for the represented source "desktop", "mobile" or "app"
      */
