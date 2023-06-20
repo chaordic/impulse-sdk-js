@@ -1,7 +1,8 @@
 {
-  "name": "@chaordic/impulse-sdk-js",
-  "version": "2.0.0",
-  "description": "",
+  "name": "@linx_impulse/impulse-sdk-js",
+  "version": "1.0.0-beta",
+  "description": "This is Events SDK for TypeScript and JavaScript. This project is open source and maintained by Impulse Events.",
+  "homepage": "https://chaordic.github.io/impulse-sdk-doc",
   "main": "./dist-cjs/index.js",
   "module": "./dist-esm/bundle.js",
   "types": "./dist-types/index.d.ts",
@@ -12,6 +13,7 @@
     "node": "18.x"
   },
   "scripts": {
+    "prebuild": "node -p \"'export const IMPULSE_SDK_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/events/common/helpers/strings/version.ts",
     "build": "rimraf dist-cjs && rimraf tsconfig.tsbuildinfo && ./node_modules/typescript/bin/tsc && tsc-alias",
     "build:types": "rimraf dist-types && ./node_modules/typescript/bin/tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
     "build:webpack": "rimraf dist-esm && webpack --mode production",
@@ -19,12 +21,14 @@
     "test": "jest --no-cache --watchAll --colors",
     "test:coverage": "jest --coverage"
   },
-  "keywords": [],
+  "keywords": [
+    "SDK", "IMPULSE", "JS", "TS", "LINX"
+  ],
   "author": {
     "name": "Events | Linx Impulse",
     "email": "impulse-events@linx.com.br"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.12",
@@ -61,7 +65,7 @@
     "url": "https://github.com/chaordic/impulse-sdk-js.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/chaordic"
+    "access": "public"
   },
   "files": [
     "dist-*/**"

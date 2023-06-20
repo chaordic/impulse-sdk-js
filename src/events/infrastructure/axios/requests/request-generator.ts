@@ -1,4 +1,5 @@
 import { AxiosRequestConfig, AxiosHeaders } from "axios";
+import { IMPULSE_SDK_VERSION } from "@/events/common/helpers/strings/version"
 
 export type RequestParamValue = string
   | Date
@@ -67,10 +68,9 @@ export class Request {
 function setHeaders(headerParams: RequestParamValue, domain?: string): AxiosHeaders {  
   let defaultHeader = {
     'Content-Type': 'application/json',
-    'User-Agent': `sdk-js-${process.env.npm_package_version}`, //frontend allows to change?
     'x-integration-platform': 'sdk',
     'x-integration-type': 'js',
-    'x-integration-version': `${process.env.npm_package_version}`,
+    'x-integration-version': `${IMPULSE_SDK_VERSION}`,
   }
 
   if (domain) {
