@@ -1,5 +1,11 @@
 # @chaordic/impulse-sdk-js
 
+## 1.0.1
+
+### Patch Changes
+
+- 3257a98: feat: change packages.json and fix identification version SDK
+
 ## 1.0.0
 
 ### Patch Changes
