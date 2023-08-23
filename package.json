@@ -1,6 +1,6 @@
 {
   "name": "@linx_impulse/impulse-sdk-js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This is Events SDK for TypeScript and JavaScript. This project is open source and maintained by Impulse Events.",
   "homepage": "https://chaordic.github.io/impulse-sdk-doc",
   "main": "./dist-cjs/index.js",
