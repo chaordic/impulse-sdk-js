@@ -1,5 +1,6 @@
+import { IMPULSE_SDK_VERSION } from "@/events/common/helpers/strings/version"
 export class LinxImpulseError extends Error {
-  static version = process.env.npm_package_version
+  static version = IMPULSE_SDK_VERSION;
   static userAgent = `LinxImpulseSDK/${this.version}`;
   
   constructor(message: string) {

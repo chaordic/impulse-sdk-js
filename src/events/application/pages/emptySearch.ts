@@ -1,7 +1,7 @@
 import { EventConfig } from "@/events/application/ports/event/event";
 import { Event } from "@/events/common/services/Event"
-import { EmptySearchInputValidation, searchValidation } from "@/events/application/validations/search.validation";
-import { SearchId, SearchQuery } from "@/events/application/schemas/search.schema";
+import { EmptySearchInputValidation, emptySearchValidation } from "@/events/application/validations/search.validation";
+import { EmptySearchId, EmptySearchQuery } from "@/events/application/schemas/empty-search.schema";
 
 /**
  * EmptySearch
@@ -10,23 +10,23 @@ import { SearchId, SearchQuery } from "@/events/application/schemas/search.schem
 export class EmptySearch extends Event<EmptySearchInputValidation> {
 
     constructor(config: EventConfig) {
-        super('emptysearch', searchValidation, config);
+        super('emptysearch', emptySearchValidation, config);
     }
     /**
      * Identifier string searching your search
-     * @param query {SearchQuery}
+     * @param query {EmptySearchQuery}
      * @returns
      */
-    query(query: SearchQuery): this {
+    query(query: EmptySearchQuery): this {
         this.data.query = query;
         return this
     }
     /**
      * Unique searchId identifier
-     * @param searchId {SearchId}
+     * @param searchId {EmptySearchId}
      * @returns
      */
-    searchId(searchId: SearchId): this {
+    searchId(searchId: EmptySearchId): this {
         this.data.searchId = searchId;
         return this
     }

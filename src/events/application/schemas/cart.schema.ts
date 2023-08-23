@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const cartTransactionSchema = z
+export const cartSchema = z
     .object({
         id: z.string({
             invalid_type_error: "id must be a string"
@@ -34,19 +34,9 @@ export const cartTransactionSchema = z
               'Either sku or price should be filled in',
             )
         )
-        .min(1)
         .transform((array) => array.filter((item) => item.pid))
-        .refine(
-            (array) => {
-                return array.length > 0
-            },
-            {
-                message: 'Cart must have at least 1 item'
-            }
-        )
+        .optional()
     });
 
-export type CartId = z.input<typeof cartTransactionSchema.shape.id>;
-export type CartItems = z.input<typeof cartTransactionSchema.shape.items>;
-export type TransactionId = z.input<typeof cartTransactionSchema.shape.id>;
-export type TransactionItems = z.input<typeof cartTransactionSchema.shape.items>; 
+export type CartId = z.input<typeof cartSchema.shape.id>;
+export type CartItems = z.input<typeof cartSchema.shape.items>;

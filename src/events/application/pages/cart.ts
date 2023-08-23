@@ -1,7 +1,7 @@
 import { EventConfig } from "@/events/application/ports/event/event";
 import { Event } from "@/events/common/services/Event"
-import { CartOutputValidation, cartTransactionValidation } from "@/events/application/validations/cart-transaction.validation";
-import { CartId, CartItems } from "@/events/application/schemas/cart-transaction.schema";
+import { CartOutputValidation, cartValidation } from "@/events/application/validations/cart-transaction.validation";
+import { CartId, CartItems } from "@/events/application/schemas/cart.schema";
 
 /**
  * Cart
@@ -10,7 +10,7 @@ import { CartId, CartItems } from "@/events/application/schemas/cart-transaction
 export class Cart extends Event<CartOutputValidation> {
 
     constructor(config: EventConfig) {
-        super('cart', cartTransactionValidation, config);
+        super('cart', cartValidation, config);
     }
     /**
      * Unique cart identifier

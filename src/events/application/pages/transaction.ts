@@ -1,7 +1,7 @@
 import { EventConfig } from "@/events/application/ports/event/event";
 import { Event } from "@/events/common/services/Event"
-import { TransactionOutputValidation, cartTransactionValidation } from "@/events/application/validations/cart-transaction.validation";
-import { TransactionId, TransactionItems } from "@/events/application/schemas/cart-transaction.schema";
+import { TransactionOutputValidation, transactionValidation } from "@/events/application/validations/cart-transaction.validation";
+import { TransactionId, TransactionItems } from "@/events/application/schemas/transaction.schema";
 
 /**
  * Transaction
@@ -10,7 +10,7 @@ import { TransactionId, TransactionItems } from "@/events/application/schemas/ca
 export class Transaction extends Event<TransactionOutputValidation> {
 
     constructor(config: EventConfig) {
-        super('transaction', cartTransactionValidation, config);
+        super('transaction', transactionValidation, config);
     }
     /**
      * Unique id transaction identifier
