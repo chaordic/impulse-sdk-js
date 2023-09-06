@@ -1,6 +1,7 @@
 export function setCookie(name: string, content: string): string {
     const date: Date = new Date();
     const ONE_YEAR: number = 3600 * 1000 * 24 * 365 * 1;
+    const domain = window.location.host.replace('www','')
 
     date.setTime(date.getTime() + (ONE_YEAR));
     const browserCookie = getCookie(name, parseBrowserCookies(document.cookie))
@@ -8,13 +9,10 @@ export function setCookie(name: string, content: string): string {
     if (browserCookie) {
         return browserCookie
     }
-    
-    document.cookie = `${name}=${content};
-        domain=${window.location.host.replace('www','')};
-        expires=${date.toUTCString()};
-        path=/`;
 
-    return content    
+    document.cookie = `${name}=${content}; Path=/; domain=${domain}; expires=${date.toUTCString()};`;
+
+    return content
 }
 
 export function getCookie(name: string, cookie: any): string | undefined {  
