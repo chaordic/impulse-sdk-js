@@ -9,7 +9,7 @@ import { IdentityInput } from "@/events/application/schemas/identity.schema";
 export interface EventBuilder {
     user?(user: UserInput): this;
     source(source: SourceInput): this;
-    deviceId(deviceId: DeviceInput): this;
+    deviceId?(deviceId: DeviceInput): this;
     identity?(identity: IdentityInput): this;
     info?(info: InfoInput): this;
     salesChannel?(salesChannel: SalesChannelInput): this;

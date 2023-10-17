@@ -37,10 +37,6 @@ export interface EventBaseConfig {
      */
     apiKey: ApiKeyInput,
     /**
-     * identifier unique (UUIDv4) for the represented device
-     */
-    deviceId?: DeviceInput
-    /**
      * identifier for the represented source "desktop", "mobile" or "app"
      */
     source: SourceInput,
@@ -64,9 +60,13 @@ export interface EventBackendConfig extends EventBaseConfig {
      */
     type: 'backend'
     /**
-     * identifier secretKey from your store 
+     * identifier secretKey from your store
      */
     secretKey: SecretKeyInput
+    /**
+     * identifier unique (UUIDv4) for the represented device
+     */
+    deviceId: DeviceInput
 }
 
 export interface EventFrontendConfig extends EventBaseConfig {

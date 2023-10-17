@@ -179,7 +179,6 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
     private setDefaultBackend(): object {
         return {
             secretKey: ("secretKey" in this.config) ? this.config.secretKey : undefined,
-            deviceId: this.config.deviceId,
             source: this.config.source
         }
     }
