@@ -1,5 +1,11 @@
 # @chaordic/impulse-sdk-js
 
+## 1.0.7
+
+### Patch Changes
+
+- 7d165dd: fix: convert base_url to string
+
 ## 1.0.1
 
 ### Patch Changes
