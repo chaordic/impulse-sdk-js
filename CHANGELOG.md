@@ -1,5 +1,11 @@
 # @chaordic/impulse-sdk-js
 
+## 1.0.9
+
+### Patch Changes
+
+- 3f56f68: update readme
+
 ## 1.0.8
 
 ### Patch Changes
