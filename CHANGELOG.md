@@ -1,5 +1,11 @@
 # @chaordic/impulse-sdk-js
 
+## 1.0.8
+
+### Patch Changes
+
+- 1b3ca4b: fix base_url
+
 ## 1.0.7
 
 ### Patch Changes
