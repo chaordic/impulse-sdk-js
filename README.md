@@ -8,7 +8,7 @@ The home page for the project is [Linx Impulse Events SDK for TypeScript and Jav
 Use the following command to install this SDK:
 
 ```
-npm install @linx_impulse/impulse-sdk-js
+npm install @linximpulse/impulse-sdk-js
 ```
 
 ## Examples
