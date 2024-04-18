@@ -1,5 +1,11 @@
 # @chaordic/impulse-sdk-js
 
+## 1.0.9
+
+### Patch Changes
+
+- f3801e0: fix the deploy flow
+
 ## 1.0.8
 
 ### Patch Changes
