@@ -26,7 +26,7 @@ export type RequestMethod =
 export class Request {
 
   constructor(
-    readonly baseEndpoint: URL,
+    readonly baseEndpoint: string,
     readonly method: RequestMethod,
     readonly bodyContent?: any,
     readonly pathParams?: RequestParamValue,
@@ -45,21 +45,21 @@ export class Request {
 
   async build(): Promise<AxiosRequestConfig> {
     const headers: AxiosHeaders = setHeaders(this.headerParams, this.bodyContent.domain);
-    const url: URL = makeUrl(this.baseEndpoint, this.queryParams);
+    const url: string = makeUrl(this.baseEndpoint, this.queryParams);
     let body: any = this.bodyContent;
 
     if (body === "{}") {
       return {
         method: `${this.method}`,
         headers: headers,
-        url: url.href
+        url
       };
     }
 
     return {
       method: `${this.method}`,
       headers: headers,
-      url: url.href,
+      url,
       data: body
     }
   }
@@ -94,10 +94,10 @@ function setHeaders(headerParams: RequestParamValue, domain?: string): AxiosHead
   return new AxiosHeaders(defaultHeader) 
 }
 
-function makeUrl(path: URL, queryParams: RequestParamValue): URL {  
+function makeUrl(path: string, queryParams: RequestParamValue): string {  
   if (queryParams !== undefined) {
     const queryString: URLSearchParams = new URLSearchParams(`${queryParams}`);
-    return new URL(`${path.href}?${queryString}`);
+    return `${path}?${queryString}`;
   }
 
   return path;

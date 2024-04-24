@@ -134,8 +134,9 @@ export abstract class Event<T extends DefaultOutputValidation = DefaultOutputVal
     async send(eventData?: RequiredOnly<T> | OptionalsOnly<T>): Promise<any | Error> { 
         try {
             const parser = new ParserSchema(this.schema)
+            const url = `${BASE_URL}/${this.path}`
             const options = await new Request(
-                new URL(`${BASE_URL}/${this.path}`),
+                url,
                 'POST',
                 parser.validate({...this.data, ...eventData})
             )
