@@ -1,6 +1,6 @@
 {
   "name": "@linximpulse/impulse-sdk-js",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "This is Events SDK for TypeScript and JavaScript. This project is open source and maintained by Impulse Events.",
   "homepage": "https://docs.linximpulse.com/sdk/getting-started",
   "main": "./dist-cjs/index.js",
