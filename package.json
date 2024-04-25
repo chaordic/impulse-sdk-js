@@ -2,7 +2,7 @@
   "name": "@linximpulse/impulse-sdk-js",
   "version": "1.0.10",
   "description": "This is Events SDK for TypeScript and JavaScript. This project is open source and maintained by Impulse Events.",
-  "homepage": "https://chaordic.github.io/impulse-sdk-doc",
+  "homepage": "https://docs.linximpulse.com/sdk/getting-started",
   "main": "./dist-cjs/index.js",
   "module": "./dist-esm/bundle.js",
   "types": "./dist-types/index.d.ts",
