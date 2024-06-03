@@ -11,6 +11,14 @@ Use the following command to install this SDK:
 npm install @linximpulse/impulse-sdk-js
 ```
 
+## Deploy
+
+```
+nvm use v18 # make sure you are using the correct verion
+npm run deploy # it will ask you for password. but leave it blank (just press ENTER)
+```
+
+
 ## Examples
 
 Examples can be found [in the examples section](https://github.com/chaordic/impulse-sdk-js/tree/main/examples)
