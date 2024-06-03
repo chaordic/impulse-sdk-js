@@ -13,6 +13,8 @@ npm install @linximpulse/impulse-sdk-js
 
 ## Deploy
 
+You must be logged into our npm registry account. [For more infos use this doc](https://share.linx.com.br/pages/viewpage.action?pageId=481519517)
+
 ```
 nvm use v18 # make sure you are using the correct verion
 npm run deploy # it will ask you for password. but leave it blank (just press ENTER)
