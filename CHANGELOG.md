@@ -1,5 +1,11 @@
 # @chaordic/impulse-sdk-js
 
+## 1.0.12
+
+### Patch Changes
+
+- 0fb3f84: chore: bump version
+
 ## 1.0.9
 
 ### Patch Changes
